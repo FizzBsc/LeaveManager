@@ -8,11 +8,13 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
+    Database myDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        myDb = new Database(this);
 
         Button leaveHistryBtn = (Button) findViewById(R.id.leaveHistoryBtn);
         leaveHistryBtn.setOnClickListener(new View.OnClickListener() {
