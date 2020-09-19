@@ -6,31 +6,23 @@ public class Employee {
      int contactNumber;
      String givenName;
      String lastName;
-     int employeeDOB;
-     String position;
-     String department;
+     String email;
      String employmentType;
-     String employeeAddress;
+     boolean status;
 
-     public Employee(int employeeID, int contactNumber, String givenName, String lastName, int employeeDOB, String position, String department, String employmentType, String employeeAddress) {
+     public Employee(int employeeID, int contactNumber, String givenName, String lastName, String email, String employmentType) {
+
           this.employeeID = employeeID;
           this.contactNumber = contactNumber;
           this.givenName = givenName;
           this.lastName = lastName;
-          this.employeeDOB = employeeDOB;
-          this.position = position;
-          this.department = department;
+          this.email = email;
           this.employmentType = employmentType;
-          this.employeeAddress = employeeAddress;
+          this.status = true;
      }
-
-
 
      //---------------------------------------------------------------------
-     public int getEmployeeID(){
-          return this.employeeID;
-
-     }
+     public int getEmployeeID(){ return this.employeeID; }
 
      public void setEmployeeID(int employeeID) {
           this.employeeID = employeeID;
@@ -60,28 +52,12 @@ public class Employee {
           this.lastName = lastName;
      }
 
-     public int getEmployeeDOB() {
-          return employeeDOB;
+     public String getEmail() {
+          return email;
      }
 
-     public void setEmployeeDOB(int employeeDOB) {
-          this.employeeDOB = employeeDOB;
-     }
-
-     public String getPosition() {
-          return position;
-     }
-
-     public void setPosition(String position) {
-          this.position = position;
-     }
-
-     public String getDepartment() {
-          return department;
-     }
-
-     public void setDepartment(String department) {
-          this.department = department;
+     public void setEmail(String email) {
+          this.email = email;
      }
 
      public String getEmploymentType() {
@@ -92,14 +68,9 @@ public class Employee {
           this.employmentType = employmentType;
      }
 
-     public String getEmployeeAddress() {
-          return employeeAddress;
-     }
+     public boolean isStatus() {return status; }
 
-     public void setEmployeeAddress(String employeeAddress) {
-          this.employeeAddress = employeeAddress;
-     }
-
+     public void setStatus(boolean status) { this.status = status; }
  //-----------------------------------------------------------------------------------------
 
 }
