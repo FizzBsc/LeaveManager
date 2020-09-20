@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         editYear = (EditText) findViewById(R.id.editText_YEAR);
         editDay = (EditText) findViewById(R.id.editText_DAY);
         btnAddData = (Button) findViewById(R.id.button_add);
-        AddDAta();
+        AddData();
 
 
 
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    public void AddDAta(){
+    public void AddData(){
         btnAddData.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
