@@ -17,6 +17,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/mngRequestsBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Manage Requests"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewStffBtn" />
+
+    <Button
         android:id="@+id/applyLeaveBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,17 +71,6 @@
         app:layout_constraintTop_toBottomOf="@+id/usrSettingsBtn" />
 
     <Button
-        android:id="@+id/mngRequestsBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Manage Requests"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewStffBtn" />
-
-    <Button
         android:id="@+id/createEmpBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -87,6 +87,7 @@
         android:layout_marginTop="20dp"
         android:text="Add Public Holiday"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/createEmpBtn" />
 
