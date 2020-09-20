@@ -8,7 +8,7 @@ public class Employee {
      String lastName;
      String email;
      String employmentType; //Admin, manager or staff
-     boolean status;
+     boolean status; //if this is an active employee or not
 
      public Employee(int employeeID, int contactNumber, String givenName, String lastName, String email, String employmentType) {
 

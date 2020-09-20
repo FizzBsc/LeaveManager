@@ -18,7 +18,7 @@ public class Error404 extends AppCompatActivity {
         bckBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent startIntent = new Intent(getApplicationContext(),MainActivity.class);
+                Intent startIntent = new Intent(getApplicationContext(),MainMenu.class);
                 startActivity(startIntent);
             }
         });
