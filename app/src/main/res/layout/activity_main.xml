@@ -21,6 +21,32 @@
             android:orientation="vertical">
 
             <Button
+                android:id="@+id/applyLeaveBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:scrollbarAlwaysDrawHorizontalTrack="false"
+                android:scrollbarAlwaysDrawVerticalTrack="false"
+                android:text="Apply For Leave" />
+
+            <Button
+                android:id="@+id/usrSettingsBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:text="User Settings" />
+
+            <Button
+                android:id="@+id/leaveHistoryBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:text="View Leave History" />
+
+            <Button
                 android:id="@+id/viewRequestsBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,39 +87,12 @@
                 android:text="Change Default Leave" />
 
             <Button
-                android:id="@+id/leaveHistoryBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:text="View Leave History" />
-
-            <Button
-                android:id="@+id/applyLeaveBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:scrollbarAlwaysDrawHorizontalTrack="false"
-                android:scrollbarAlwaysDrawVerticalTrack="false"
-                android:text="Apply For Leave" />
-
-            <Button
                 android:id="@+id/addPblcHldyBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:text="Add Public Holiday" />
-
-            <Button
-                android:id="@+id/usrSettingsBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:text="User Settings" />
 
             <TextView
                 android:id="@+id/textView2"

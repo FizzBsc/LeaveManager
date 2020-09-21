@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import Model.Database;
+
 public class AddPublicHoliday extends AppCompatActivity {
     Database myDb;
     HolidayDB Hdb;
