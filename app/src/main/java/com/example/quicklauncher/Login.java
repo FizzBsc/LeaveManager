@@ -32,7 +32,7 @@ public class Login extends AppCompatActivity {
         empPasswordField = (EditText) findViewById(R.id.empPasswordField);
         Database d = new Database(Login.this);
         d.loadPassToArr();
-        Log.d("array",passwordArr.get(0).eID + " " + passwordArr.get(0).isNewEmp);
+        Log.d("array",passwordArr.get(0).eID + " " + passwordArr.get(0).isNewEmp);//delete before submit
         loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
 

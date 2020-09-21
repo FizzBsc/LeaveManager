@@ -88,7 +88,7 @@ public class Database extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + PASSWORDB + "("+ COLUMN_ID +" TEXT PRIMARY KEY, "+ COLUMN_PASSWORD +" TEXT, "+ COLUMN_ISNEWEMP +" TEXT)");
+       // db.execSQL("create table " + PASSWORDB + "("+ COLUMN_ID +" TEXT PRIMARY KEY, "+ COLUMN_PASSWORD +" TEXT, "+ COLUMN_ISNEWEMP +" TEXT)");
     }
 
     @Override

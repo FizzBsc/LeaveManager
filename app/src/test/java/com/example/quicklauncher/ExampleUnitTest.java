@@ -2,6 +2,9 @@ package com.example.quicklauncher;
 
 import org.junit.Test;
 
+import Model.Database;
+import Model.PasswordDB;
+
 import static org.junit.Assert.*;
 
 /**
@@ -12,6 +15,9 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+        PasswordDB pass = new PasswordDB("b", "pop", true);
+        Database.passwordArr.add(pass);
+        String a = Database.passwordArr.get(0).eID;
+        assertEquals(a, "b");
     }
 }
