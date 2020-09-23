@@ -10,6 +10,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import Model.Database;
+import Model.LeaveTypeDB;
 
 import static Model.Database.passwordArr;
 
@@ -27,10 +28,21 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Database d = new Database(Login.this);
+
+        Database.leaveTypeDBArr.add(new LeaveTypeDB("1","Annual Leave", 20 ));
+        Database.leaveTypeDBArr.add(new LeaveTypeDB("2","Carer's Leave", 15 ));
+        Database.leaveTypeDBArr.add(new LeaveTypeDB("3","Blood Donor Leave", 365 ));
+        Database.leaveTypeDBArr.add(new LeaveTypeDB("4","Sick Leave with certificate", 30 ));
+        Database.leaveTypeDBArr.add(new LeaveTypeDB("5","Sick Leave without certificate", 7 ));
+        Database.leaveTypeDBArr.add(new LeaveTypeDB("6","Parental Leave", 120 ));
+        Database.leaveTypeDBArr.add(new LeaveTypeDB("6","Unpaid Leave", 365 ));
+
+        d.addLeaveType();
 
         eIDField = (EditText) findViewById(R.id.eIDField);
         empPasswordField = (EditText) findViewById(R.id.empPasswordField);
-        Database d = new Database(Login.this);
+
         d.loadPassToArr();
         Log.d("array",passwordArr.get(0).eID + " " + passwordArr.get(0).isNewEmp);//delete before submit
         loginButton = (Button) findViewById(R.id.loginButton);

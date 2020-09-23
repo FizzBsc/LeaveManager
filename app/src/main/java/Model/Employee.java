@@ -2,7 +2,7 @@ package Model;
 
 public class Employee {
 // Creating account for new employees
-     int employeeID;
+     String employeeID;
      int contactNumber;
      String givenName;
      String lastName;
@@ -10,7 +10,7 @@ public class Employee {
      String employmentType; //Admin, manager or staff
      boolean status; //if this is an active employee or not
 
-     public Employee(int employeeID, int contactNumber, String givenName, String lastName, String email, String employmentType) {
+     public Employee(String employeeID, int contactNumber, String givenName, String lastName, String email, String employmentType) {
 
           this.employeeID = employeeID;
           this.contactNumber = contactNumber;
@@ -22,9 +22,9 @@ public class Employee {
      }
 
      //---------------------------------------------------------------------
-     public int getEmployeeID(){ return this.employeeID; }
+     public String getEmployeeID(){ return this.employeeID; }
 
-     public void setEmployeeID(int employeeID) {
+     public void setEmployeeID(String employeeID) {
           this.employeeID = employeeID;
      }
 
