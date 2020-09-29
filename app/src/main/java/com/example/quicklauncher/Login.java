@@ -1,11 +1,13 @@
 package com.example.quicklauncher;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,11 +21,13 @@ public class Login extends AppCompatActivity {
 
     public static String eid;
     String password;
+    int tries = 0;
 
 
     Button loginButton;
     EditText eIDField;
     EditText empPasswordField;
+    TextView triesText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +76,16 @@ public class Login extends AppCompatActivity {
                     } else if(checkNewUser(eid) == true){
                         Intent startIntent = new Intent(getApplicationContext(), ChangePassword.class);
                         startActivity(startIntent);
+                    }
+                } else if (checkPassword(eid,password) == false){
+                    empPasswordField.setError("Wrong Password");
+                    tries++;
+                    triesText = (TextView) findViewById(R.id.passErrorText);
+                    triesText.setError("");
+                    triesText.setTextColor(Color.RED);
+                    triesText.setText("Attempt left:" + (3-tries));
+                    if (tries == 3){
+                        triesText.setText("You've been locked out please contact an Administrator");
                     }
                 }
 

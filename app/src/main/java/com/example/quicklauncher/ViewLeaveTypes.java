@@ -50,7 +50,7 @@ public class ViewLeaveTypes extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
 
             convertView = getLayoutInflater().inflate(R.layout.customleavelayout, null);
 
@@ -63,7 +63,8 @@ public class ViewLeaveTypes extends AppCompatActivity {
             editBut.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent startIntent = new Intent(getApplicationContext(),Error404.class);
+                    Intent startIntent = new Intent(getApplicationContext(),EditLeave.class);
+                    startIntent.putExtra("ID", position);
                     startActivity(startIntent);
                 }
             });

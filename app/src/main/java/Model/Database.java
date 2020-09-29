@@ -102,6 +102,13 @@ public class Database extends SQLiteOpenHelper {
             e.printStackTrace();
         }
     }
+    public void updateLeaveType(String id, int days){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String strSQL = "UPDATE " + LEAVEDB + " SET " + COLUMN_DAYSAVAIL + " = '" + days + "'" + " WHERE " + COLUMN_LTID + " = '" + id +"'";
+        db.execSQL(strSQL);
+
+
+    }
     public void loadPassToArr(){
         int i = 0;
         SQLiteDatabase db = this.getReadableDatabase();
