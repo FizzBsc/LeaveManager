@@ -16,15 +16,11 @@ public class EmployeeLeaveAvailable {
         this.daysAvail = daysAvail;
     }
 
+    public void addNewUserHolidays(String a){
 
-
-
-    public void addHolidays(String eID){
-        int i = 1;
-
-
-
-
+        for (int i = 0; i < Database.leaveTypeDBArr.size(); i++) {
+            Database.employeeLeaveAvailArr.add(new EmployeeLeaveAvailable(a + Database.leaveTypeDBArr.get(i).lTID, a, Database.leaveTypeDBArr.get(i).leaveName, 0, Database.leaveTypeDBArr.get(i).daysAvail));
+        }
 
     }
 

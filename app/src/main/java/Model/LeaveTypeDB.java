@@ -3,12 +3,12 @@ package Model;
 public class LeaveTypeDB {
 
     String lTID;
-    String LeaveName;
+    String leaveName;
     int daysAvail;
 
     public LeaveTypeDB(String lTID, String leaveName, int daysAvail) {
         this.lTID = lTID;
-        LeaveName = leaveName;
+        this.leaveName = leaveName;
         this.daysAvail = daysAvail;
     }
 
@@ -22,11 +22,11 @@ public class LeaveTypeDB {
     }
 
     public String getLeaveName() {
-        return LeaveName;
+        return leaveName;
     }
 
     public void setLeaveName(String leaveName) {
-        LeaveName = leaveName;
+        leaveName = leaveName;
     }
 
     public int getDaysAvail() {

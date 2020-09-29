@@ -7,10 +7,14 @@ public class Employee {
      String givenName;
      String lastName;
      String email;
-     String employmentType; //Admin, manager or staff
+     String employmentType; //admin, manager or staff
+
+
+     String managedBy; //eid
+
      boolean status; //if this is an active employee or not
 
-     public Employee(String employeeID, int contactNumber, String givenName, String lastName, String email, String employmentType) {
+     public Employee(String employeeID, int contactNumber, String givenName, String lastName, String email, String employmentType,String managedBy) {
 
           this.employeeID = employeeID;
           this.contactNumber = contactNumber;
@@ -18,7 +22,7 @@ public class Employee {
           this.lastName = lastName;
           this.email = email;
           this.employmentType = employmentType;
-          this.status = true;
+          this.managedBy = managedBy;
      }
 
      //---------------------------------------------------------------------
@@ -71,6 +75,14 @@ public class Employee {
      public boolean isStatus() {return status; }
 
      public void setStatus(boolean status) { this.status = status; }
- //-----------------------------------------------------------------------------------------
+     public String getManagedBy() {
+          return managedBy;
+     }
+
+     public void setManagedBy(String managedBy) {
+          this.managedBy = managedBy;
+     }
+
+     //-----------------------------------------------------------------------------------------
 
 }

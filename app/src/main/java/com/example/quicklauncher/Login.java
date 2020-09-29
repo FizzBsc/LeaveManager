@@ -10,7 +10,8 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import Model.Database;
-import Model.LeaveTypeDB;
+import Model.Employee;
+import Model.EmployeeLeaveAvailable;
 
 import static Model.Database.passwordArr;
 
@@ -28,30 +29,38 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+//        Database db = new Database(Login.this);
+//        db.adduser("b", "123");
         Database d = new Database(Login.this);
 
-        Database.leaveTypeDBArr.add(new LeaveTypeDB("1","Annual Leave", 20 ));
-        Database.leaveTypeDBArr.add(new LeaveTypeDB("2","Carer's Leave", 15 ));
-        Database.leaveTypeDBArr.add(new LeaveTypeDB("3","Blood Donor Leave", 365 ));
-        Database.leaveTypeDBArr.add(new LeaveTypeDB("4","Sick Leave with certificate", 30 ));
-        Database.leaveTypeDBArr.add(new LeaveTypeDB("5","Sick Leave without certificate", 7 ));
-        Database.leaveTypeDBArr.add(new LeaveTypeDB("6","Parental Leave", 120 ));
-        Database.leaveTypeDBArr.add(new LeaveTypeDB("6","Unpaid Leave", 365 ));
-
-        d.addLeaveType();
 
         eIDField = (EditText) findViewById(R.id.eIDField);
         empPasswordField = (EditText) findViewById(R.id.empPasswordField);
-
-        d.loadPassToArr();
+        EmployeeLeaveAvailable ela = new EmployeeLeaveAvailable(null,null,null,0,0);
+        Employee emp = new Employee("a",0430405557,"hafiz", "halid", "s@gmail.com", "admin", "b");
+        Employee ep = new Employee("b",0430405557,"hafiz", "halid", "s@gmail.com", "manager", "b");
+        Employee e = new Employee("c",0430405557,"Bobby", "Jones", "s@gmail.com", "staff", "b");
+//
+//        d.loadPassToArr();
+//        d.loadLeaveTypeToArr();
+//        d.user.add(emp);
+//        d.user.add(ep);
+//        d.user.add(e);
+//
+//
+//        d.loadLeaveApplicationToArr();
+//        ela.addNewUserHolidays("b");
+//        ela.addNewUserHolidays("c");
+        for(int i =0; i <Database.employeeLeaveAvailArr.size(); i++) {
+            Log.d("trying ", Database.employeeLeaveAvailArr.get(i).geteLAID() + " " + Database.employeeLeaveAvailArr.get(i).geteID() + " " + Database.employeeLeaveAvailArr.get(i).getTypeOfLeave() + " " + Database.employeeLeaveAvailArr.get(i).getDaysAvail() + " " + Database.employeeLeaveAvailArr.get(i).getDaysTaken());
+        }
         Log.d("array",passwordArr.get(0).eID + " " + passwordArr.get(0).isNewEmp);//delete before submit
         loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                Database db = new Database(Login.this);
-                //db.adduser("b", "123");
+
                 Log.d("QuickLauncher", "its here");
                 eid = eIDField.getText().toString();
                 password = empPasswordField.getText().toString();
@@ -60,6 +69,7 @@ public class Login extends AppCompatActivity {
                     if (checkNewUser(eid) == false) {
                         Intent startIntent = new Intent(getApplicationContext(), MainMenu.class);
                         startActivity(startIntent);
+
                     } else if(checkNewUser(eid) == true){
                         Intent startIntent = new Intent(getApplicationContext(), ChangePassword.class);
                         startActivity(startIntent);

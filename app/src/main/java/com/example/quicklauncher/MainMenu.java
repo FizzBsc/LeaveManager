@@ -27,7 +27,7 @@ public class MainMenu extends AppCompatActivity {
         applyLeaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent startIntent = new Intent(getApplicationContext(),Error404.class);
+                Intent startIntent = new Intent(getApplicationContext(),ApplyForLeave.class);
                 startActivity(startIntent);
             }
         });
@@ -57,7 +57,7 @@ public class MainMenu extends AppCompatActivity {
         viewStffBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent startIntent = new Intent(getApplicationContext(),Error404.class);
+                Intent startIntent = new Intent(getApplicationContext(),StaffList.class);
                 startActivity(startIntent);
             }
         });

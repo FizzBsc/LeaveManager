@@ -17,4 +17,13 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string-array name="typeOfLeave">
+        <item>Annual Leave</item>
+        <item>Carer\'s Leave</item>
+        <item>Blood Donor Leave</item>
+        <item>Sick Leave with certificate</item>
+        <item>Sick Leave without certificate</item>
+        <item>Parental Leave</item>
+        <item>Unpaid Leave</item>
+    </string-array>
 </resources>
