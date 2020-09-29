@@ -97,7 +97,7 @@ public class MainMenu extends AppCompatActivity {
         dfltLeaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent startIntent = new Intent(getApplicationContext(),Error404.class);
+                Intent startIntent = new Intent(getApplicationContext(),ViewLeaveTypes.class);
                 startActivity(startIntent);
             }
         });

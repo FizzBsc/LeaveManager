@@ -93,7 +93,7 @@ public class Database extends SQLiteOpenHelper {
                     LeaveTypeDB lTDB = new LeaveTypeDB(a,b,d);
                     leaveTypeDBArr.add(lTDB);
 
-                    Log.d("checking", leaveTypeDBArr.get(i).lTID +" " + leaveTypeDBArr.get(i).leaveName + " " +leaveTypeDBArr.get(i).daysAvail);
+                    Log.d("checking1", leaveTypeDBArr.get(i).lTID +" " + leaveTypeDBArr.get(i).leaveName + " " +leaveTypeDBArr.get(i).daysAvail);
                     i++;
                     cursor.moveToNext();
                 }
