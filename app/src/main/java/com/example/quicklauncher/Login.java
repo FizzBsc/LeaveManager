@@ -29,8 +29,8 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-//        Database db = new Database(Login.this);
-//        db.adduser("b", "123");
+        Database db = new Database(Login.this);
+        db.adduser("b", "123");
         Database d = new Database(Login.this);
 
 
@@ -40,21 +40,20 @@ public class Login extends AppCompatActivity {
         Employee emp = new Employee("a",0430405557,"hafiz", "halid", "s@gmail.com", "admin", "b");
         Employee ep = new Employee("b",0430405557,"hafiz", "halid", "s@gmail.com", "manager", "b");
         Employee e = new Employee("c",0430405557,"Bobby", "Jones", "s@gmail.com", "staff", "b");
-//
-//        d.loadPassToArr();
-//        d.loadLeaveTypeToArr();
-//        d.user.add(emp);
-//        d.user.add(ep);
-//        d.user.add(e);
-//
-//
-//        d.loadLeaveApplicationToArr();
-//        ela.addNewUserHolidays("b");
-//        ela.addNewUserHolidays("c");
+
+        d.loadPassToArr();
+        d.loadLeaveTypeToArr();
+        d.user.add(emp);
+        d.user.add(ep);
+        d.user.add(e);
+
+
+        d.loadLeaveApplicationToArr();
+        ela.addNewUserHolidays("b");
+        ela.addNewUserHolidays("c");
         for(int i =0; i <Database.employeeLeaveAvailArr.size(); i++) {
             Log.d("trying ", Database.employeeLeaveAvailArr.get(i).geteLAID() + " " + Database.employeeLeaveAvailArr.get(i).geteID() + " " + Database.employeeLeaveAvailArr.get(i).getTypeOfLeave() + " " + Database.employeeLeaveAvailArr.get(i).getDaysAvail() + " " + Database.employeeLeaveAvailArr.get(i).getDaysTaken());
         }
-        Log.d("array",passwordArr.get(0).eID + " " + passwordArr.get(0).isNewEmp);//delete before submit
         loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
 
