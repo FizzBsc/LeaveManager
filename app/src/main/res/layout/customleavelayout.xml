@@ -21,7 +21,7 @@
 
 
     <TextView
-        android:id="@+id/lTIDText"
+        android:id="@+id/nameView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -42,16 +42,16 @@
         android:layout_marginStart="79dp"
         android:layout_marginLeft="79dp"
         android:layout_marginTop="5dp"
-        android:layout_toEndOf="@+id/lTIDText"
-        android:layout_toRightOf="@+id/lTIDText"
+        android:layout_toEndOf="@+id/nameView1"
+        android:layout_toRightOf="@+id/nameView1"
         android:text="TextView"
         android:textColor="@android:color/black" />
 
     <TextView
-        android:id="@+id/daysAvailText"
+        android:id="@+id/typeOfLeaveView"
         android:layout_width="123dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/lTIDText"
+        android:layout_below="@+id/nameView1"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_marginStart="37dp"

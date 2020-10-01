@@ -67,7 +67,7 @@ public class MainMenu extends AppCompatActivity {
         mngReqBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent startIntent = new Intent(getApplicationContext(),Error404.class);
+                Intent startIntent = new Intent(getApplicationContext(),CheckRequests.class);
                 startActivity(startIntent);
             }
         });
@@ -77,7 +77,7 @@ public class MainMenu extends AppCompatActivity {
         createEmpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent startIntent = new Intent(getApplicationContext(),Error404.class);
+                Intent startIntent = new Intent(getApplicationContext(), NewUser.class);
                 startActivity(startIntent);
             }
         });
