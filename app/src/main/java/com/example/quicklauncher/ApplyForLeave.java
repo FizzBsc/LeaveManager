@@ -13,6 +13,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -137,6 +138,9 @@ public class ApplyForLeave extends AppCompatActivity {
                         db.addLeaveApplication(laID, Login.eid, leaveName, d1, d2, i, "pending");
                         for (int z = 0; z<Database.leaveApplicationDBArr.size(); z++) {
                             Log.d("Leave approved", iDCount +" "+Database.leaveApplicationDBArr.get(z).leaveAppID +" "+Database.leaveApplicationDBArr.get(z).eID);
+                            Toast.makeText(getApplicationContext(), leaveName + " is now pending approval", Toast.LENGTH_SHORT).show();
+                            Intent startIntent = new Intent(getApplicationContext(), MainMenu.class);
+                            startActivity(startIntent);
                         }
                     } else{
                         messageView.setError(" ");

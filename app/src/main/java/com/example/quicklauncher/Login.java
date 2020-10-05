@@ -12,9 +12,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import Model.Database;
-import Model.Employee;
-import Model.EmployeeLeaveAvailable;
-import Model.LeaveApplication;
 
 import static Model.Database.passwordArr;
 
@@ -37,38 +34,38 @@ public class Login extends AppCompatActivity {
 //        Database db = new Database(Login.this);
 //        db.adduser("b", "123");
         Database d = new Database(Login.this);
-
+        d.loadPassToArr();
+        d.loadLeaveTypeToArr();
+        d.loadLeaveApplicationToArr();
+        d.loadEmployeeLeaveAvailable();
+        StartProg sp= new StartProg();
+        sp.setup();
 
         eIDField = (EditText) findViewById(R.id.eIDField);
         empPasswordField = (EditText) findViewById(R.id.empPasswordField);
-        EmployeeLeaveAvailable ela = new EmployeeLeaveAvailable(null,null,null,0,0);
-        Employee emp = new Employee("a",0430405557,"hafiz", "halid", "s@gmail.com", "admin", "a");
-        Employee ep = new Employee("b",0430405557,"elmo", "sesame", "s@gmail.com", "manager", "b");
-        Employee e = new Employee("c",0430405557,"Bobby", "Jones", "s@gmail.com", "staff", "b");
-        LeaveApplication la = new LeaveApplication("try","c", "Annual Leave","30/09/2020","01/10/2020",1,"pending");
-        LeaveApplication lA = new LeaveApplication("try1","a", "Annual Leave","02/10/2020","03/10/2020",1,"pending");
-        LeaveApplication l = new LeaveApplication("try2","c", "Annual Leave","04/10/2020","05/10/2020",1,"pending");
 
-        ela.addNewUserHolidays("b");
-        ela.addNewUserHolidays("c");
-        Log.d("password size", Integer.toString(d.employeeLeaveAvailArr.size()));
 
-        d.loadPassToArr();
-        d.loadLeaveTypeToArr();
-        d.user.add(emp);
-        d.user.add(ep);
-        d.user.add(e);
-        d.leaveApplicationDBArr.add(la);
-        d.leaveApplicationDBArr.add(lA);
-        d.leaveApplicationDBArr.add(l);
+
+        for (int i = 0; i <Database.leaveApplicationDBArr.size();i++ ){
+            Log.d("leave Applications",  Database.leaveApplicationDBArr.get(i).getLeaveAppID() +" "+Database.leaveApplicationDBArr.get(i).getApprovalStatus());
+
+
+        }
+        for(int x = 0; x < Database.leaveTypeDBArr.size();x++) {
+            Log.d("checkLeaveType", Database.leaveTypeDBArr.get(x).getLeaveName());
+        }
         for (int i = 0; i <d.passwordArr.size();i++) {
             Log.d("password", d.passwordArr.get(i).getPassword());
         }
 
 
-        d.loadLeaveApplicationToArr();
+
 
         for(int i =0; i <d.employeeLeaveAvailArr.size(); i++) {
+            if (d.employeeLeaveAvailArr.get(i).geteLAID()==null){
+                d.employeeLeaveAvailArr.remove(i);
+            }
+
             Log.d("added here ", d.employeeLeaveAvailArr.get(i).geteLAID() + " " + Database.employeeLeaveAvailArr.get(i).geteID() + " " + Database.employeeLeaveAvailArr.get(i).getTypeOfLeave() + " " + Database.employeeLeaveAvailArr.get(i).getDaysAvail() + " " + Database.employeeLeaveAvailArr.get(i).getDaysTaken());
         }
         loginButton = (Button) findViewById(R.id.loginButton);

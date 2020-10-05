@@ -1,5 +1,8 @@
 package Model;
 
+import android.content.Context;
+import android.util.Log;
+
 public class EmployeeLeaveAvailable {
 
     String eLAID;
@@ -16,10 +19,18 @@ public class EmployeeLeaveAvailable {
         this.daysAvail = daysAvail;
     }
 
-    public void addNewUserHolidays(String a){
+    private Context mContext;
 
+    public EmployeeLeaveAvailable(Context context){
+        mContext = context;
+    }
+    public void addNewUserHolidays(String a){
+        Database db = new Database(mContext);
+        Log.d("works here", "works here");
         for (int i = 0; i < Database.leaveTypeDBArr.size(); i++) {
+            Log.d("works here again", Database.leaveTypeDBArr.get(i).getLeaveName());
             Database.employeeLeaveAvailArr.add(new EmployeeLeaveAvailable(a + Database.leaveTypeDBArr.get(i).lTID, a, Database.leaveTypeDBArr.get(i).leaveName, 0, Database.leaveTypeDBArr.get(i).daysAvail));
+            db.addEmployeeLeaveAvailable(a + Database.leaveTypeDBArr.get(i).lTID, a, Database.leaveTypeDBArr.get(i).leaveName, 0, Database.leaveTypeDBArr.get(i).daysAvail);
         }
 
     }

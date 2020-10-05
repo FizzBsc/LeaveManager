@@ -22,6 +22,8 @@ public class Database extends SQLiteOpenHelper {
     public static final String PASSWORDB = "password_table";
     public static final String LEAVEDB = "LeaveType_table";
     public static final String LEAVEAPPLICATION = "Leave_application_table";
+    public static final String EMPLOYEELEAVEAVAIL = "Employee_leave_available_table";
+
 
     public static final String COLUMN_PID = "ID";
     public static final String COLUMN_PASSWORD = "PASSWORD";
@@ -38,6 +40,9 @@ public class Database extends SQLiteOpenHelper {
     public static final String COLUMN_ENDDATE = "ENDDATE";
     public static final String COLUMN_NOOFDAYS = "NOOFDAYS";
     public static final String COLUMN_APPROVALSTATUS = "APPROVALSTATUS";
+
+    public static final String COLUMN_ELAID = "ELAID";
+    public static final String COLUMN_DAYSTAKEN = "DAYSTAKEN";
 
     public void adduser(String eID, String password) {
         Log.d("QuickLauncher", "its crash");
@@ -58,15 +63,15 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-//        for (int i = 0; i<leaveTypeDBArr.size(); i++) {
-//
-//            cv.put(COLUMN_LTID, leaveTypeDBArr.get(i).lTID);
-//            cv.put(COLUMN_LEAVENAME,  leaveTypeDBArr.get(i).LeaveName);
-//            cv.put(COLUMN_DAYSAVAIL,  leaveTypeDBArr.get(i).daysAvail);
-//
-//            db.insert(LEAVEDB, null, cv);
-//            Log.d("QuickLauncher", "added" +  leaveTypeDBArr.get(i).LeaveName);
-//        }
+        for (int i = 0; i<leaveTypeDBArr.size(); i++) {
+
+            cv.put(COLUMN_LTID, leaveTypeDBArr.get(i).lTID);
+            cv.put(COLUMN_LEAVENAME,  leaveTypeDBArr.get(i).leaveName);
+            cv.put(COLUMN_DAYSAVAIL,  leaveTypeDBArr.get(i).daysAvail);
+
+            db.insert(LEAVEDB, null, cv);
+            Log.d("QuickLauncher", "added" +  leaveTypeDBArr.get(i).leaveName);
+        }
     }
     public void updateNewUsr(String id,String pass, String i){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -183,6 +188,61 @@ public class Database extends SQLiteOpenHelper {
             e.printStackTrace();
         }
     }
+    public void updateLeaveApplication(String status, String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String strSQL = "UPDATE " + LEAVEAPPLICATION + " SET " + COLUMN_APPROVALSTATUS + " = '" + status + "'" + " WHERE " + COLUMN_LEAVEAPPID + " = '" + id +"'";
+        db.execSQL(strSQL);
+    }
+
+    public void addEmployeeLeaveAvailable(String leaveAppID, String eID, String typeOfLeave, int daysTaken, int daysAvail){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+
+        ContentValues cv = new ContentValues();
+
+        cv.put(COLUMN_ELAID, leaveAppID);
+        cv.put(COLUMN_EID, eID);
+        cv.put(COLUMN_TYPEOFLEAVE, typeOfLeave);
+        cv.put(COLUMN_DAYSTAKEN, daysTaken);
+        cv.put(COLUMN_DAYSAVAIL, daysAvail);
+
+        db.insert(EMPLOYEELEAVEAVAIL,null,cv);
+    }
+    public void loadEmployeeLeaveAvailable(){
+        int i = 0;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + EMPLOYEELEAVEAVAIL;
+
+        Cursor cursor = db.rawQuery(query, null);
+        try {
+            if (cursor.moveToFirst()) {
+
+                while (!cursor.isAfterLast()) {
+
+                    String a = cursor.getString(cursor.getColumnIndex(COLUMN_ELAID));
+                    String b = cursor.getString(cursor.getColumnIndex(COLUMN_EID));
+                    String c = cursor.getString(cursor.getColumnIndex(COLUMN_TYPEOFLEAVE));
+                    int d = cursor.getInt(cursor.getColumnIndex(COLUMN_DAYSTAKEN));
+                    int e = cursor.getInt(cursor.getColumnIndex(COLUMN_DAYSAVAIL));
+
+
+                    EmployeeLeaveAvailable ela = new EmployeeLeaveAvailable(a, b, c, d, e);
+                    employeeLeaveAvailArr.add(ela);
+
+                    Log.d("employeeLeaveAvailArr", employeeLeaveAvailArr.get(i).eID +" " );
+                    i++;
+                    cursor.moveToNext();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void updateEmployeeLeaveAvailable(int daysTaken, int daysAvail,  String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String strSQL = "UPDATE " + EMPLOYEELEAVEAVAIL + " SET " + COLUMN_DAYSTAKEN + " = '" + daysTaken + "'," + COLUMN_DAYSAVAIL + " = '" + daysAvail + "'"+"  WHERE " + COLUMN_ELAID + " = '" + id +"'";
+        db.execSQL(strSQL);
+    }
 
     public Database(Context context) {
         super(context, DATABASE_NAME, null , 1);
@@ -194,6 +254,7 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL("create table " + PASSWORDB + "("+ COLUMN_PID +" TEXT PRIMARY KEY, "+ COLUMN_PASSWORD +" TEXT, "+ COLUMN_ISNEWEMP +" TEXT)");
         db.execSQL("create table " + LEAVEDB + "("+ COLUMN_LTID +" TEXT PRIMARY KEY, "+ COLUMN_LEAVENAME +" TEXT, "+ COLUMN_DAYSAVAIL +" INTEGER)");
         db.execSQL("create table " + LEAVEAPPLICATION + "("+ COLUMN_LEAVEAPPID +" TEXT PRIMARY KEY, "+ COLUMN_EID +" TEXT, "+ COLUMN_TYPEOFLEAVE +" TEXT, "+ COLUMN_STARTDATE +" TEXT, "+ COLUMN_ENDDATE +" TEXT, "+ COLUMN_NOOFDAYS +" INTEGER, "+ COLUMN_APPROVALSTATUS +" TEXT )");
+        db.execSQL("create table " + EMPLOYEELEAVEAVAIL + "("+ COLUMN_ELAID +" TEXT PRIMARY KEY, "+ COLUMN_EID +" TEXT, "+ COLUMN_TYPEOFLEAVE +" TEXT, "+ COLUMN_DAYSTAKEN +" TEXT, "+ COLUMN_DAYSAVAIL +" TEXT )");
 
 
     }

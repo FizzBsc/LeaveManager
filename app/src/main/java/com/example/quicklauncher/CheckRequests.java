@@ -1,6 +1,10 @@
 package com.example.quicklauncher;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -49,16 +53,58 @@ public class CheckRequests extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
 
             convertView = getLayoutInflater().inflate(R.layout.customrequestlayout, null);
 
-            TextView nameView = (TextView) convertView.findViewById(R.id.nameView1);
-            TextView noOfDaysView = (TextView) convertView.findViewById(R.id.noOfDaysView);
-            TextView typeOfLeaveView = (TextView) convertView.findViewById(R.id.typeOfLeaveView);
-            TextView dateView1 = (TextView) convertView.findViewById(R.id.dateView1);
-            ImageButton approveButton = (ImageButton) convertView.findViewById(R.id.approveBut);
-            ImageButton rejectButton = (ImageButton) convertView.findViewById(R.id.deniedBut);
+            final TextView nameView = (TextView) convertView.findViewById(R.id.nameView1);
+            final TextView noOfDaysView = (TextView) convertView.findViewById(R.id.noOfDaysView);
+            final TextView typeOfLeaveView = (TextView) convertView.findViewById(R.id.typeOfLeaveView);
+            final TextView dateView1 = (TextView) convertView.findViewById(R.id.dateView1);
+            final ImageButton approveButton = (ImageButton) convertView.findViewById(R.id.approveBut);
+            final ImageButton rejectButton = (ImageButton) convertView.findViewById(R.id.deniedBut);
+
+            approveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Database.leaveApplicationDBArr.get(position).setApprovalStatus("approved");
+                    db.updateLeaveApplication("approved",Database.leaveApplicationDBArr.get(position).getLeaveAppID());
+                    updateDaysTaken(Database.leaveApplicationDBArr.get(position).geteID(),Database.leaveApplicationDBArr.get(position).getTypeOfLeave(),Database.leaveApplicationDBArr.get(position).getNoOfDays());
+
+                    hide(nameView,noOfDaysView,typeOfLeaveView,dateView1,approveButton,rejectButton);
+
+                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(CheckRequests.this);
+                    dlgAlert.setMessage("Leave has been approved");
+                    dlgAlert.setTitle("Leave Manager");
+                    dlgAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            sendEmail();
+                            //dismiss the dialog
+                        }
+                    });
+                    dlgAlert.setCancelable(true);
+                    dlgAlert.create().show();
+                }
+            });
+            rejectButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Database.leaveApplicationDBArr.get(position).setApprovalStatus("rejected");
+                    db.updateLeaveApplication("rejected",Database.leaveApplicationDBArr.get(position).getLeaveAppID());
+                    hide(nameView,noOfDaysView,typeOfLeaveView,dateView1,approveButton,rejectButton);
+
+                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(CheckRequests.this);
+                    dlgAlert.setMessage("Leave has been rejected");
+                    dlgAlert.setTitle("Leave Manager");
+                    dlgAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //dismiss the dialog
+                        }
+                    });
+                    dlgAlert.setCancelable(true);
+                    dlgAlert.create().show();
+                }
+            });
 
             int index = 0;
 
@@ -76,10 +122,16 @@ public class CheckRequests extends AppCompatActivity {
                             break;
                         }
                     }
-                    nameView.setText(db.user.get(index).getGivenName());
-                    noOfDaysView.setText(Integer.toString(Database.leaveApplicationDBArr.get(position).getNoOfDays()));
-                    typeOfLeaveView.setText(Database.leaveApplicationDBArr.get(position).getTypeOfLeave());
-                    dateView1.setText(Database.leaveApplicationDBArr.get(position).getStartDate() + " - " + Database.leaveApplicationDBArr.get(position).getEndDate());
+
+                    if (Database.leaveApplicationDBArr.get(position).getApprovalStatus().equals("pending")){
+                        nameView.setText(db.user.get(index).getGivenName() + " "+db.user.get(index).getLastName());
+                        noOfDaysView.setText("Number of\n days : " + Database.leaveApplicationDBArr.get(position).getNoOfDays());
+                        typeOfLeaveView.setText(Database.leaveApplicationDBArr.get(position).getTypeOfLeave());
+                        dateView1.setText(Database.leaveApplicationDBArr.get(position).getStartDate() + " - " + Database.leaveApplicationDBArr.get(position).getEndDate());
+                    } else {
+                        hide(nameView,noOfDaysView,typeOfLeaveView,dateView1,approveButton,rejectButton);
+
+                    }
                 }else if (role.equals("manager")){
                     for (int i = 0; i < db.user.size(); i++) {
                         if (db.user.get(i).getEmployeeID().equals(db.leaveApplicationDBArr.get(position).geteID())) {
@@ -88,35 +140,68 @@ public class CheckRequests extends AppCompatActivity {
                         }
                     }
                     if (Database.user.get(index).getManagedBy().equals(Login.eid)){
-                        nameView.setText(db.user.get(index).getGivenName());
-                        noOfDaysView.setText(Integer.toString(Database.leaveApplicationDBArr.get(position).getNoOfDays()));
-                        typeOfLeaveView.setText(Database.leaveApplicationDBArr.get(position).getTypeOfLeave());
-                        dateView1.setText(Database.leaveApplicationDBArr.get(position).getStartDate() + " - " +Database.leaveApplicationDBArr.get(position).getEndDate());
+                        if (Database.leaveApplicationDBArr.get(position).getApprovalStatus().equals("pending")) {
+                            nameView.setText(db.user.get(index).getGivenName() + " "+db.user.get(index).getLastName());
+                            noOfDaysView.setText("Number of\n days : " + Database.leaveApplicationDBArr.get(position).getNoOfDays());
+                            typeOfLeaveView.setText(Database.leaveApplicationDBArr.get(position).getTypeOfLeave());
+                            dateView1.setText(Database.leaveApplicationDBArr.get(position).getStartDate() + " - " + Database.leaveApplicationDBArr.get(position).getEndDate());
+                        }else {
+                            hide(nameView,noOfDaysView,typeOfLeaveView,dateView1,approveButton,rejectButton);
+                        }
                     } else{
-                        nameView.setVisibility(View.GONE);
-                        noOfDaysView.setVisibility(View.GONE);
-                        typeOfLeaveView.setVisibility(View.GONE);
-                        dateView1.setVisibility(View.GONE);
-                        approveButton.setVisibility(View.GONE);
-                        rejectButton.setVisibility(View.GONE);
+                        hide(nameView,noOfDaysView,typeOfLeaveView,dateView1,approveButton,rejectButton);
                     }
                 }
 
 
             }else{
-                nameView.setVisibility(View.GONE);
-                noOfDaysView.setVisibility(View.GONE);
-                typeOfLeaveView.setVisibility(View.GONE);
-                dateView1.setVisibility(View.GONE);
-                approveButton.setVisibility(View.GONE);
-                rejectButton.setVisibility(View.GONE);
-
+                hide(nameView,noOfDaysView,typeOfLeaveView,dateView1,approveButton,rejectButton);
             }
 
 
 
             return convertView;
 
+
+        }
+        public void hide(TextView nameView, TextView noOfDaysView,TextView typeOfLeaveView,TextView dateView1, ImageButton approveButton, ImageButton rejectButton ){
+            nameView.setVisibility(View.GONE);
+            noOfDaysView.setVisibility(View.GONE);
+            typeOfLeaveView.setVisibility(View.GONE);
+            dateView1.setVisibility(View.GONE);
+            approveButton.setVisibility(View.GONE);
+            rejectButton.setVisibility(View.GONE);
+        }
+
+        public void updateDaysTaken(String eid, String typeOfLeave,int noOfDays){
+            Database db = new Database(CheckRequests.this);
+            Log.d("size",Integer.toString(Database.employeeLeaveAvailArr.size()));
+            for (int i = 0; i < Database.employeeLeaveAvailArr.size();i++){
+                Log.d("check crash", Database.employeeLeaveAvailArr.get(i).geteID());
+                if (Database.employeeLeaveAvailArr.get(i).geteID().equals(eid)){
+                    if (Database.employeeLeaveAvailArr.get(i).getTypeOfLeave().equals(typeOfLeave)){
+                        Database.employeeLeaveAvailArr.get(i).setDaysTaken(Database.employeeLeaveAvailArr.get(i).getDaysTaken() + noOfDays);
+                        Database.employeeLeaveAvailArr.get(i).setDaysAvail(Database.employeeLeaveAvailArr.get(i).getDaysAvail()-noOfDays);
+                        db.updateEmployeeLeaveAvailable(Database.employeeLeaveAvailArr.get(i).getDaysTaken(), Database.employeeLeaveAvailArr.get(i).getDaysAvail(),Database.employeeLeaveAvailArr.get(i).geteLAID());
+                        Log.d("did it update",Database.employeeLeaveAvailArr.get(i).getDaysTaken() +" "+ Database.employeeLeaveAvailArr.get(i).getDaysAvail()+" "+Database.employeeLeaveAvailArr.get(i).geteLAID());
+                        break;
+                    }
+                }
+            }
+
+        }
+
+
+        public void sendEmail(){
+            Intent email = new Intent(Intent.ACTION_SEND);
+            email.putExtra(Intent.EXTRA_EMAIL, new String[]{ "Bsc.hhafiz@gmail.com"});
+            email.putExtra(Intent.EXTRA_SUBJECT, "Leave Request");
+            email.putExtra(Intent.EXTRA_TEXT, "Your request has been approved!");
+
+//need this to prompts email client only
+            email.setType("message/rfc822");
+
+            startActivity(Intent.createChooser(email, "Choose an Email client :"));
         }
     }
 }
