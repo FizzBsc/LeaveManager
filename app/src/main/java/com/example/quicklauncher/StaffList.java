@@ -54,13 +54,13 @@ public class StaffList extends AppCompatActivity {
             String role = null;
             convertView = getLayoutInflater().inflate(R.layout.customuserlayout, null);
 
-            RelativeLayout rl = (RelativeLayout) convertView.findViewById(R.id.relativeLayout);
+            RelativeLayout rl = (RelativeLayout) convertView.findViewById(R.id.relativeLayout2);
             TextView firstNameText = (TextView) convertView.findViewById(R.id.firstNameText);
             TextView lastNameText = (TextView) convertView.findViewById(R.id.lastNameText);
             TextView emailText = (TextView) convertView.findViewById(R.id.emailText);
-            TextView empStatus = (TextView) convertView.findViewById(R.id.empStatustext);
+            TextView empStatus = (TextView) convertView.findViewById(R.id.notifyPersonView);
             TextView empLevelText = (TextView) convertView.findViewById(R.id.empLevelText);
-            Button editBut = (Button) convertView.findViewById(R.id.editBut);
+            Button editBut = (Button) convertView.findViewById(R.id.notifyBut);
 
             editBut.setOnClickListener(new View.OnClickListener() {
                 @Override

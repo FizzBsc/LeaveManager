@@ -20,6 +20,7 @@ public class Login extends AppCompatActivity {
     public static String eid;
     String password;
     int tries = 0;
+    String employeeType = "hi";
 
 
     Button loginButton;
@@ -61,13 +62,14 @@ public class Login extends AppCompatActivity {
 
 
 
-        for(int i =0; i <d.employeeLeaveAvailArr.size(); i++) {
+        for (int i =0; i <d.employeeLeaveAvailArr.size(); i++) {
             if (d.employeeLeaveAvailArr.get(i).geteLAID()==null){
                 d.employeeLeaveAvailArr.remove(i);
             }
 
             Log.d("added here ", d.employeeLeaveAvailArr.get(i).geteLAID() + " " + Database.employeeLeaveAvailArr.get(i).geteID() + " " + Database.employeeLeaveAvailArr.get(i).getTypeOfLeave() + " " + Database.employeeLeaveAvailArr.get(i).getDaysAvail() + " " + Database.employeeLeaveAvailArr.get(i).getDaysTaken());
         }
+
         loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
 
@@ -77,6 +79,10 @@ public class Login extends AppCompatActivity {
                 Log.d("QuickLauncher", "its here");
                 eid = eIDField.getText().toString();
                 password = empPasswordField.getText().toString();
+                Log.d("employee type", employeeType);
+                Log.d("Employee type: ", String.valueOf(Database.user.size()));
+
+
 
                 if (checkPassword(eid,password) == true){
                     if (checkNewUser(eid) == false) {

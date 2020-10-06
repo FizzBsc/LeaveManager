@@ -4,7 +4,7 @@ public class Employee {
 // Creating account for new employees
      String employeeID;
      int contactNumber;
-     String givenName;
+     public String givenName;
      String lastName;
      String email;
      String employmentType; //admin, manager or staff

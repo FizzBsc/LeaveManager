@@ -21,6 +21,15 @@
             android:orientation="vertical">
 
             <Button
+                android:id="@+id/notificationButton"
+                android:layout_width="73dp"
+                android:layout_height="67dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/notification"
+                app:layout_constraintStart_toStartOf="@id/applyLeaveBtn" />
+
+            <Button
                 android:id="@+id/applyLeaveBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                android:text="View Requests" />
+                android:text="My Requests" />
 
             <Button
                 android:id="@+id/createEmpBtn"
@@ -100,6 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="100sp"
                 android:text="SEPM Assignment1" />
+
         </LinearLayout>
     </ScrollView>
 
