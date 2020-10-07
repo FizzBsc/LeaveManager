@@ -49,9 +49,10 @@ public class StaffList extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
 
             String role = null;
+            String id = null;
             convertView = getLayoutInflater().inflate(R.layout.customuserlayout, null);
 
             RelativeLayout rl = (RelativeLayout) convertView.findViewById(R.id.relativeLayout2);
@@ -62,10 +63,14 @@ public class StaffList extends AppCompatActivity {
             TextView empLevelText = (TextView) convertView.findViewById(R.id.empLevelText);
             Button editBut = (Button) convertView.findViewById(R.id.notifyBut);
 
+            id = Database.user.get(position).getEmployeeID();
+
+            final String finalId = id;
             editBut.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent startIntent = new Intent(getApplicationContext(),Error404.class);
+                    Intent startIntent = new Intent(getApplicationContext(),EditEmployee.class);
+                    startIntent.putExtra("ID", finalId);
                     startActivity(startIntent);
                 }
             });

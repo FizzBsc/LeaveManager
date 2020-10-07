@@ -26,4 +26,9 @@
         <item>Parental Leave</item>
         <item>Unpaid Leave</item>
     </string-array>
+    <string-array name="employeeType">
+        <item>staff</item>
+        <item>manager</item>
+        <item>admin</item>
+    </string-array>
 </resources>
