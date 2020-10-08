@@ -32,8 +32,8 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-//        Database db = new Database(Login.this);
-//        db.adduser("b", "123");
+        Database db = new Database(Login.this);
+        db.adduser("b", "123");
         Database d = new Database(Login.this);
         d.loadPassToArr();
         d.loadLeaveTypeToArr();
