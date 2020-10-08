@@ -53,11 +53,11 @@
         app:layout_constraintTop_toTopOf="@+id/textView" />
 
     <Switch
-        android:id="@+id/status"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
+        android:id="@+id/statusSwitch"
+        android:layout_width="231dp"
+        android:layout_height="35dp"
         android:gravity="center_vertical"
-        android:text="  Status"
+        android:text="Employee Status"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

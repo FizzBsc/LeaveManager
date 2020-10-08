@@ -23,6 +23,7 @@ public class Employee {
           this.email = email;
           this.employmentType = employmentType;
           this.managedBy = managedBy;
+          status = true;
      }
 
      //---------------------------------------------------------------------

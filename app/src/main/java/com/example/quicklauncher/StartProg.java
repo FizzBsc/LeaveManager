@@ -44,6 +44,7 @@ public class StartProg {
         Database.user.add(emp);
         Database.user.add(ep);
         Database.user.add(e);
+
         Database.leaveApplicationDBArr.add(la);
         Database.leaveApplicationDBArr.add(lA);
         Database.leaveApplicationDBArr.add(l);
