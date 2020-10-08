@@ -26,6 +26,7 @@ public class MainMenu extends AppCompatActivity {
                 Log.d("employee type1", employeeType);
             }
         }
+
         Log.d("Employee e: ", employeeType);
         Button leaveHistryBtn = (Button) findViewById(R.id.leaveHistoryBtn);
         leaveHistryBtn.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +69,7 @@ public class MainMenu extends AppCompatActivity {
         });
 
         Button usrSettBtn = (Button) findViewById(R.id.usrSettingsBtn);
-        //usrSettBtn.setVisibility(Button.GONE);
+        usrSettBtn.setVisibility(Button.GONE);
         usrSettBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
