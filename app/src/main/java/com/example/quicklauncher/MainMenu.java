@@ -1,5 +1,7 @@
 package com.example.quicklauncher;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +26,24 @@ public class MainMenu extends AppCompatActivity {
             if (Database.user.get(i).getEmployeeID().equals(Login.eid)){
                 employeeType = Database.user.get(i).getEmploymentType();
                 Log.d("employee type1", employeeType);
+            }
+        }
+        for (int i = 0; i<Database.employeeLeaveAvailArr.size(); i++){//PBI6
+            if (Database.employeeLeaveAvailArr.get(i).geteID().equals(Login.eid)){
+                if (Database.employeeLeaveAvailArr.get(i).getTypeOfLeave().equals("Annual Leave")){
+                    if(Database.employeeLeaveAvailArr.get(i).getDaysTaken()==0){
+                        AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(MainMenu.this);
+                        dlgAlert.setMessage("You have not taken any Annual Leave this year");
+                        dlgAlert.setTitle("Leave Manager");
+                        dlgAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                //dismiss the dialog
+                            }
+                        });
+                        dlgAlert.setCancelable(true);
+                        dlgAlert.create().show();
+                    }
+                }
             }
         }
 
