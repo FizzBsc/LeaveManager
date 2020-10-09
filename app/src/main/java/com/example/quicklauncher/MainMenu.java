@@ -89,7 +89,6 @@ public class MainMenu extends AppCompatActivity {
         });
 
         Button availableLeaveBtn = (Button) findViewById(R.id.availableLeaveBtn);
-        availableLeaveBtn.setVisibility(Button.GONE);
         availableLeaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,7 +110,7 @@ public class MainMenu extends AppCompatActivity {
         mngReqBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent startIntent = new Intent(getApplicationContext(),CheckRequests.class);
+                Intent startIntent = new Intent(getApplicationContext(), ManageRequests.class);
                 startActivity(startIntent);
             }
         });

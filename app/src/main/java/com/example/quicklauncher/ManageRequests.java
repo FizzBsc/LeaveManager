@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import Model.Database;
 
-public class CheckRequests extends AppCompatActivity {
+public class ManageRequests extends AppCompatActivity {
 
     ListView requestLeaveView;
     String role;
@@ -35,7 +35,7 @@ public class CheckRequests extends AppCompatActivity {
 
     class CustomAdapter extends BaseAdapter {
 
-        Database db = new Database(CheckRequests.this);
+        Database db = new Database(ManageRequests.this);
 
         @Override
         public int getCount() {
@@ -73,7 +73,7 @@ public class CheckRequests extends AppCompatActivity {
 
                     hide(nameView,noOfDaysView,typeOfLeaveView,dateView1,approveButton,rejectButton);
 
-                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(CheckRequests.this);
+                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(ManageRequests.this);
                     dlgAlert.setMessage("Leave has been approved");
                     dlgAlert.setTitle("Leave Manager");
                     dlgAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -93,7 +93,7 @@ public class CheckRequests extends AppCompatActivity {
                     db.updateLeaveApplication("rejected",Database.leaveApplicationDBArr.get(position).getLeaveAppID());
                     hide(nameView,noOfDaysView,typeOfLeaveView,dateView1,approveButton,rejectButton);
 
-                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(CheckRequests.this);
+                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(ManageRequests.this);
                     dlgAlert.setMessage("Leave has been rejected");
                     dlgAlert.setTitle("Leave Manager");
                     dlgAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -174,7 +174,7 @@ public class CheckRequests extends AppCompatActivity {
         }
 
         public void updateDaysTaken(String eid, String typeOfLeave,int noOfDays){
-            Database db = new Database(CheckRequests.this);
+            Database db = new Database(ManageRequests.this);
             Log.d("size",Integer.toString(Database.employeeLeaveAvailArr.size()));
             for (int i = 0; i < Database.employeeLeaveAvailArr.size();i++){
                 Log.d("check crash", Database.employeeLeaveAvailArr.get(i).geteID());

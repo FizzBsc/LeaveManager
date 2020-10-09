@@ -21,9 +21,6 @@ public class EmployeeLeaveAvailable {
 
     private Context mContext;
 
-    public EmployeeLeaveAvailable(Context context){
-        mContext = context;
-    }
     public void addNewUserHolidays(String a){
         Database db = new Database(mContext);
         Log.d("works here", "works here");

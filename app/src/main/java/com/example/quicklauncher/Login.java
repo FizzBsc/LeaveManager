@@ -20,8 +20,6 @@ public class Login extends AppCompatActivity {
     public static String eid;
     String password;
     int tries = 0;
-    String employeeType = "hi";
-
 
     Button loginButton;
     EditText eIDField;
@@ -50,7 +48,6 @@ public class Login extends AppCompatActivity {
         for (int i = 0; i <Database.leaveApplicationDBArr.size();i++ ){
             Log.d("leave Applications",  Database.leaveApplicationDBArr.get(i).getLeaveAppID() +" "+Database.leaveApplicationDBArr.get(i).getApprovalStatus());
 
-
         }
         for(int x = 0; x < Database.leaveTypeDBArr.size();x++) {
             Log.d("checkLeaveType", Database.leaveTypeDBArr.get(x).getLeaveName());
@@ -76,11 +73,8 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Log.d("QuickLauncher", "its here");
                 eid = eIDField.getText().toString();
                 password = empPasswordField.getText().toString();
-                Log.d("employee type", employeeType);
-                Log.d("Employee type: ", String.valueOf(Database.user.size()));
 
 
 
