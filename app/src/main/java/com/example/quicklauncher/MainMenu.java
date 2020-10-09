@@ -68,9 +68,9 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        Button usrSettBtn = (Button) findViewById(R.id.usrSettingsBtn);
-        usrSettBtn.setVisibility(Button.GONE);
-        usrSettBtn.setOnClickListener(new View.OnClickListener() {
+        Button availableLeaveBtn = (Button) findViewById(R.id.availableLeaveBtn);
+        availableLeaveBtn.setVisibility(Button.GONE);
+        availableLeaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent startIntent = new Intent(getApplicationContext(),Error404.class);

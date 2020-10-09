@@ -10,8 +10,8 @@ public class StartProg {
 
     public void setup(){
 
-        Employee emp = new Employee("a",0430405557,"hafiz", "halid", "s@gmail.com", "admin", "a");
-        Employee ep = new Employee("b",0430405557,"elmo", "sesame", "s@gmail.com", "manager", "b");
+        Employee emp = new Employee("b",0430405557,"hafiz", "halid", "s@gmail.com", "admin", "a");
+        Employee ep = new Employee("a",0430405557,"elmo", "sesame", "s@gmail.com", "manager", "b");
         Employee e = new Employee("c",0430405557,"Bobby", "Jones", "s@gmail.com", "staff", "b");
         LeaveApplication la = new LeaveApplication("try","c", "Annual Leave","30/09/2020","01/10/2020",1,"pending");
         LeaveApplication lA = new LeaveApplication("try1","a", "Annual Leave","02/10/2020","03/10/2020",1,"pending");

@@ -40,12 +40,12 @@
                 android:text="Apply For Leave" />
 
             <Button
-                android:id="@+id/usrSettingsBtn"
+                android:id="@+id/availableLeaveBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                android:text="User Settings" />
+                android:text="Available Leave" />
 
             <Button
                 android:id="@+id/leaveHistoryBtn"
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                android:text="View Staff" />
+                android:text="Staff List" />
 
             <Button
                 android:id="@+id/dfltLeaveBtn"
