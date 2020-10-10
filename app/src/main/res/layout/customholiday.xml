@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLa"
+    android:id="@+id/relativeLayout5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -17,7 +17,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="28dp"
         android:layout_marginRight="28dp"
-        android:text="Edit" />
+        android:text="Delete" />
 
 
     <TextView
@@ -28,9 +28,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="37dp"
-        android:layout_marginLeft="37dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="25dp"
         android:text="TextView"
         android:textColor="@android:color/black" />
 
@@ -39,24 +39,12 @@
         android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="79dp"
-        android:layout_marginLeft="79dp"
-        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="54dp"
+        android:layout_marginLeft="54dp"
+        android:layout_marginTop="25dp"
         android:layout_toEndOf="@+id/leaveTypeView1"
         android:layout_toRightOf="@+id/leaveTypeView1"
-        android:text="TextView"
-        android:textColor="@android:color/black" />
-
-    <TextView
-        android:id="@+id/typeOfLeaveView"
-        android:layout_width="123dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/leaveTypeView1"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="37dp"
-        android:layout_marginLeft="37dp"
-        android:layout_marginTop="32dp"
         android:text="TextView"
         android:textColor="@android:color/black" />
 

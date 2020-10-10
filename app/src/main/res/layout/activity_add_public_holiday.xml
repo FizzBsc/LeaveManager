@@ -7,67 +7,63 @@
     tools:context=".Error404">
 
     <Button
-        android:id="@+id/button_add"
-        android:layout_width="90dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
-        android:text="ADD DATA"
+        android:id="@+id/addHolidayBtn"
+        android:layout_width="126dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="8dp"
+        android:text="Add holiday"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_DAY"
+        app:layout_constraintTop_toBottomOf="@+id/datePicker"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/editText_DATE"
+        android:id="@+id/holidayNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="56dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="DATE"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.059"
+        app:layout_constraintHorizontal_bias="0.92"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText_MONTH"
+        android:id="@+id/datePicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
+        android:hint="Date"
         android:inputType="textPersonName"
-        android:text="MONTH"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.059"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_DATE" />
+        app:layout_constraintTop_toBottomOf="@+id/holidayNameText" />
 
-    <EditText
-        android:id="@+id/editText_YEAR"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="YEAR"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.059"
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="158dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="56dp"
+        android:text="Holiday Name:"
+        android:textColor="@android:color/black"
+        android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_MONTH" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editText_DAY"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="DAY"
+    <ListView
+        android:id="@+id/holidayList"
+        android:layout_width="409dp"
+        android:layout_height="480dp"
+        android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.059"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_YEAR" />
+        app:layout_constraintTop_toBottomOf="@+id/addHolidayBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

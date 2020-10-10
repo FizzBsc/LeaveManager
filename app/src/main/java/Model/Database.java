@@ -16,6 +16,7 @@ public class Database extends SQLiteOpenHelper {
     public static ArrayList<LeaveTypeDB> leaveTypeDBArr = new ArrayList<>();
     public static ArrayList<LeaveApplication> leaveApplicationDBArr = new ArrayList<>();
     public static ArrayList<Employee> user = new ArrayList<>();
+    public static ArrayList<PublicHoliday> publicHolidayArrayList = new ArrayList<>();
 
 
     public static final String DATABASE_NAME= "Quicklauncher.db";

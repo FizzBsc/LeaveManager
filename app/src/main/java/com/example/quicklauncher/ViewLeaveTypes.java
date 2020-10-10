@@ -54,11 +54,11 @@ public class ViewLeaveTypes extends AppCompatActivity {
 
             convertView = getLayoutInflater().inflate(R.layout.customleavelayout, null);
 
-            RelativeLayout rl = (RelativeLayout) convertView.findViewById(R.id.relativeLayout1);
-            TextView lTIDText = (TextView) convertView.findViewById(R.id.nameView1);
-            TextView leaveNameText = (TextView) convertView.findViewById(R.id.leaveNameText);
+            RelativeLayout rl = (RelativeLayout) convertView.findViewById(R.id.relativeLa);
+            TextView lTIDText = (TextView) convertView.findViewById(R.id.leaveTypeView1);
+            TextView leaveNameText = (TextView) convertView.findViewById(R.id.daysLeftView1);
             TextView daysAvailText = (TextView) convertView.findViewById(R.id.typeOfLeaveView);
-            Button editBut = (Button) convertView.findViewById(R.id.editBut1);
+            Button editBut = (Button) convertView.findViewById(R.id.deleteButton);
 
             editBut.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -57,7 +57,7 @@ public class ManageRequests extends AppCompatActivity {
 
             convertView = getLayoutInflater().inflate(R.layout.customrequestlayout, null);
 
-            final TextView nameView = (TextView) convertView.findViewById(R.id.nameView1);
+            final TextView nameView = (TextView) convertView.findViewById(R.id.leaveTypeView1);
             final TextView noOfDaysView = (TextView) convertView.findViewById(R.id.noOfDaysView);
             final TextView typeOfLeaveView = (TextView) convertView.findViewById(R.id.typeOfLeaveView);
             final TextView dateView1 = (TextView) convertView.findViewById(R.id.dateView1);

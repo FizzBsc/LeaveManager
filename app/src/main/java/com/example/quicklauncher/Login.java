@@ -30,9 +30,8 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Database db = new Database(Login.this);
-        db.adduser("b", "123");
         Database d = new Database(Login.this);
+        d.adduser("b", "123");
         d.loadPassToArr();
         d.loadLeaveTypeToArr();
         d.loadLeaveApplicationToArr();
@@ -54,6 +53,10 @@ public class Login extends AppCompatActivity {
         }
         for (int i = 0; i <d.passwordArr.size();i++) {
             Log.d("password", d.passwordArr.get(i).getPassword());
+        }
+        for (int i = 0; i < Database.leaveApplicationDBArr.size(); i++){
+            Log.d("Leave applications", d.leaveApplicationDBArr.get(i).geteID());
+
         }
 
 

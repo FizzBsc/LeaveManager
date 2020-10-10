@@ -8,8 +8,6 @@ public class Employee {
      String lastName;
      String email;
      String employmentType; //admin, manager or staff
-
-
      String managedBy; //eid
 
      boolean status; //if this is an active employee or not

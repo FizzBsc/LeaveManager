@@ -18,41 +18,17 @@ public class MainMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-       String employeeType = "hi";
-       Log.d("Employee type: ", employeeType);
 
-        for (int i = 0; i < Database.user.size(); i++){
-            Log.d("employee type", Database.user.get(i).getGivenName());
-            if (Database.user.get(i).getEmployeeID().equals(Login.eid)){
-                employeeType = Database.user.get(i).getEmploymentType();
-                Log.d("employee type1", employeeType);
-            }
-        }
-        for (int i = 0; i<Database.employeeLeaveAvailArr.size(); i++){//PBI6
-            if (Database.employeeLeaveAvailArr.get(i).geteID().equals(Login.eid)){
-                if (Database.employeeLeaveAvailArr.get(i).getTypeOfLeave().equals("Annual Leave")){
-                    if(Database.employeeLeaveAvailArr.get(i).getDaysTaken()==0){
-                        AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(MainMenu.this);
-                        dlgAlert.setMessage("You have not taken any Annual Leave this year");
-                        dlgAlert.setTitle("Leave Manager");
-                        dlgAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                //dismiss the dialog
-                            }
-                        });
-                        dlgAlert.setCancelable(true);
-                        dlgAlert.create().show();
-                    }
-                }
-            }
-        }
+        String employeeType = empType(Login.eid);
+
+        checkAnnualLeave();
 
         Log.d("Employee e: ", employeeType);
         Button leaveHistryBtn = (Button) findViewById(R.id.leaveHistoryBtn);
         leaveHistryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent startIntent = new Intent(getApplicationContext(),Error404.class);
+                Intent startIntent = new Intent(getApplicationContext(),RequestHistory.class);
                 startActivity(startIntent);
             }
         });
@@ -79,11 +55,10 @@ public class MainMenu extends AppCompatActivity {
         });
 
         Button viewRqstBtn = (Button) findViewById(R.id.viewRequestsBtn);
-        //viewRqstBtn.setVisibility(Button.GONE);
         viewRqstBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent startIntent = new Intent(getApplicationContext(),Error404.class);
+                Intent startIntent = new Intent(getApplicationContext(), ViewMyRequests.class);
                 startActivity(startIntent);
             }
         });
@@ -92,7 +67,7 @@ public class MainMenu extends AppCompatActivity {
         availableLeaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent startIntent = new Intent(getApplicationContext(),Error404.class);
+                Intent startIntent = new Intent(getApplicationContext(),AvailableLeave.class);
                 startActivity(startIntent);
             }
         });
@@ -119,7 +94,7 @@ public class MainMenu extends AppCompatActivity {
         createEmpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent startIntent = new Intent(getApplicationContext(), NewUser.class);
+                Intent startIntent = new Intent(getApplicationContext(), Error404.class);
                 startActivity(startIntent);
             }
         });
@@ -179,5 +154,37 @@ public class MainMenu extends AppCompatActivity {
 
         }
             return false;
+    }
+    public void checkAnnualLeave(){
+        for (int i = 0; i<Database.employeeLeaveAvailArr.size(); i++){//PBI6
+            if (Database.employeeLeaveAvailArr.get(i).geteID().equals(Login.eid)){
+                if (Database.employeeLeaveAvailArr.get(i).getTypeOfLeave().equals("Annual Leave")){
+                    if(Database.employeeLeaveAvailArr.get(i).getDaysTaken()==0){
+                        AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(MainMenu.this);
+                        dlgAlert.setMessage("You have not taken any Annual Leave this year");
+                        dlgAlert.setTitle("Leave Manager");
+                        dlgAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                //dismiss the dialog
+                            }
+                        });
+                        dlgAlert.setCancelable(true);
+                        dlgAlert.create().show();
+                    }
+                }
+            }
+        }
+    }
+    public String empType(String eid){
+        String employeeType;
+        for (int i = 0; i < Database.user.size(); i++){
+            Log.d("employee type", Database.user.get(i).getGivenName());
+            if (Database.user.get(i).getEmployeeID().equals(eid)){
+                employeeType = Database.user.get(i).getEmploymentType();
+                Log.d("employee type1", employeeType);
+                return employeeType;
+            }
+        }
+        return null;
     }
 }
