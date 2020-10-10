@@ -4,19 +4,15 @@ import android.util.Log;
 
 import Model.Database;
 import Model.Employee;
-import Model.LeaveApplication;
 import Model.LeaveTypeDB;
 
 public class StartProg {
 
     public void setup(){
 
+
+
         Employee emp = new Employee("b",0430405557,"hafiz", "halid", "s@gmail.com", "admin", "a");
-        Employee ep = new Employee("a",0430405557,"elmo", "sesame", "s@gmail.com", "manager", "b");
-        Employee e = new Employee("c",0430405557,"Bobby", "Jones", "s@gmail.com", "staff", "b");
-        LeaveApplication la = new LeaveApplication("try","c", "Annual Leave","30/09/2020","01/10/2020",1,"pending");
-        LeaveApplication lA = new LeaveApplication("try1","a", "Annual Leave","02/10/2020","03/10/2020",1,"pending");
-        LeaveApplication l = new LeaveApplication("try2","c", "Annual Leave","04/10/2020","05/10/2020",1,"pending");
 
         if (Database.leaveTypeDBArr.size() == 0) {
             LeaveTypeDB al = new LeaveTypeDB("1", "Annual Leave", 20);
@@ -43,11 +39,6 @@ public class StartProg {
 
 
         Database.user.add(emp);
-        Database.user.add(ep);
-        Database.user.add(e);
 
-        Database.leaveApplicationDBArr.add(la);
-        Database.leaveApplicationDBArr.add(lA);
-        Database.leaveApplicationDBArr.add(l);
     }
 }

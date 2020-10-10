@@ -23,7 +23,6 @@ public class MainMenu extends AppCompatActivity {
 
         checkAnnualLeave();
 
-        Log.d("Employee e: ", employeeType);
         Button leaveHistryBtn = (Button) findViewById(R.id.leaveHistoryBtn);
         leaveHistryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +93,7 @@ public class MainMenu extends AppCompatActivity {
         createEmpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent startIntent = new Intent(getApplicationContext(), Error404.class);
+                Intent startIntent = new Intent(getApplicationContext(), NewUser.class);
                 startActivity(startIntent);
             }
         });

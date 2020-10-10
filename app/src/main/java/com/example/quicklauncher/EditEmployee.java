@@ -55,11 +55,11 @@ public class EditEmployee extends AppCompatActivity {
 
         employeeID.setText("Employee ID: " + eid +" \nName: " + db.user.get(position).getGivenName() + " " + db.user.get(position).getLastName() );
 
-        ArrayAdapter <String> typeOfLeaveAdapter = new ArrayAdapter<String>(EditEmployee.this,
+        ArrayAdapter <String> typeOfemp = new ArrayAdapter<String>(EditEmployee.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.employeeType));
-        typeOfLeaveAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        typeOfemp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        employmentTypeSpinner.setAdapter(typeOfLeaveAdapter);
+        employmentTypeSpinner.setAdapter(typeOfemp);
 
         statusSw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

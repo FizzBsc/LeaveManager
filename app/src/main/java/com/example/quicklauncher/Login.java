@@ -31,13 +31,18 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Database d = new Database(Login.this);
-        d.adduser("b", "123");
+        d.loadHoliday();
         d.loadPassToArr();
         d.loadLeaveTypeToArr();
         d.loadLeaveApplicationToArr();
         d.loadEmployeeLeaveAvailable();
+        d.loadUser();
         StartProg sp= new StartProg();
         sp.setup();
+        if (Database.passwordArr.size()==0){
+            d.addPassword("b","123");
+            d.passwordArr.get(0).setNewEmp(false);
+        }
 
         eIDField = (EditText) findViewById(R.id.eIDField);
         empPasswordField = (EditText) findViewById(R.id.empPasswordField);
@@ -54,8 +59,8 @@ public class Login extends AppCompatActivity {
         for (int i = 0; i <d.passwordArr.size();i++) {
             Log.d("password", d.passwordArr.get(i).getPassword());
         }
-        for (int i = 0; i < Database.leaveApplicationDBArr.size(); i++){
-            Log.d("Leave applications", d.leaveApplicationDBArr.get(i).geteID());
+        for (int i = 0; i < Database.employeeLeaveAvailArr.size(); i++){
+            Log.d("Leave avail", d.employeeLeaveAvailArr.get(i).geteID());
 
         }
 

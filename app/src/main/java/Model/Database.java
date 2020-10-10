@@ -24,7 +24,20 @@ public class Database extends SQLiteOpenHelper {
     public static final String LEAVEDB = "LeaveType_table";
     public static final String LEAVEAPPLICATION = "Leave_application_table";
     public static final String EMPLOYEELEAVEAVAIL = "Employee_leave_available_table";
+    public static final String USERS = "Users_table";
+    public static final String PUBLICHOLIDAY = "public_holiday_table";
 
+    public static final String COLUMN_PHID = "PHID";
+    public static final String COLUMN_HOLIDAYNAME = "HOLIDAYNAME";
+    public static final String COLUMN_HOLIDAYDATE = "HOLIDAYDATE";
+
+    public static final String COLUMN_EID = "EID";
+    public static final String COLUMN_CONTACTNUMBER = "CONTACTNUMBER";
+    public static final String COLUMN_GIVENNAME = "GIVENNAME";
+    public static final String COLUMN_LASTNAME = "LASTNAME";
+    public static final String COLUMN_EMAIL = "EMAIL";
+    public static final String COLUMN_EMPTYPE = "EMPTYPE";
+    public static final String COLUMN_MANAGER = "MANAGER";
 
     public static final String COLUMN_PID = "ID";
     public static final String COLUMN_PASSWORD = "PASSWORD";
@@ -35,7 +48,6 @@ public class Database extends SQLiteOpenHelper {
     public static final String COLUMN_DAYSAVAIL = "DAYSAVAILABLE";
 
     public static final String COLUMN_LEAVEAPPID = "LEAVEAPPID";
-    public static final String COLUMN_EID = "EID";
     public static final String COLUMN_TYPEOFLEAVE = "TYPEOFLEAVE";
     public static final String COLUMN_STARTDATE = "STARTDATE";
     public static final String COLUMN_ENDDATE = "ENDDATE";
@@ -45,10 +57,10 @@ public class Database extends SQLiteOpenHelper {
     public static final String COLUMN_ELAID = "ELAID";
     public static final String COLUMN_DAYSTAKEN = "DAYSTAKEN";
 
-    public void adduser(String eID, String password) {
+    public void addPassword(String eID, String password) {
         Log.d("QuickLauncher", "its crash");
-        PasswordDB fakeUser = new PasswordDB(eID, password, null);
-        passwordArr.add(fakeUser);
+        PasswordDB user = new PasswordDB(eID, password, null);
+        passwordArr.add(user);
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -244,6 +256,93 @@ public class Database extends SQLiteOpenHelper {
         String strSQL = "UPDATE " + EMPLOYEELEAVEAVAIL + " SET " + COLUMN_DAYSTAKEN + " = '" + daysTaken + "'," + COLUMN_DAYSAVAIL + " = '" + daysAvail + "'"+"  WHERE " + COLUMN_ELAID + " = '" + id +"'";
         db.execSQL(strSQL);
     }
+    public void addUser(String eid, String contactNo, String givenName, String lastName, String email,String empType, String manager){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(COLUMN_EID, eid);
+        cv.put(COLUMN_CONTACTNUMBER, contactNo);
+        cv.put(COLUMN_GIVENNAME, givenName);
+        cv.put(COLUMN_LASTNAME, lastName);
+        cv.put(COLUMN_EMAIL, email);
+        cv.put(COLUMN_EMPTYPE, empType);
+        cv.put(COLUMN_MANAGER, manager);
+
+
+        db.insert(USERS,null,cv);
+    }
+
+    public void loadUser(){
+        int i = 0;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + USERS;
+
+        Cursor cursor = db.rawQuery(query, null);
+        try {
+            if (cursor.moveToFirst()) {
+
+                while (!cursor.isAfterLast()) {
+
+                    String a = cursor.getString(cursor.getColumnIndex(COLUMN_EID));
+                    int b = cursor.getInt(cursor.getColumnIndex(COLUMN_CONTACTNUMBER));
+                    String c = cursor.getString(cursor.getColumnIndex(COLUMN_GIVENNAME));
+                    String d = cursor.getString(cursor.getColumnIndex(COLUMN_LASTNAME));
+                    String e = cursor.getString(cursor.getColumnIndex(COLUMN_EMAIL));
+                    String f = cursor.getString(cursor.getColumnIndex(COLUMN_EMPTYPE));
+                    String g = cursor.getString(cursor.getColumnIndex(COLUMN_MANAGER));
+
+
+                    Employee us = new Employee(a, b, c, d, e,f,g);
+                    user.add(us);
+
+                    Log.d("employeeLeaveAvailArr", user.get(i).getEmployeeID() +" " );
+                    i++;
+                    cursor.moveToNext();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addHoliday(String phid, String hName, String hDate){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(COLUMN_PHID, phid);
+        cv.put(COLUMN_HOLIDAYNAME, hName);
+        cv.put(COLUMN_HOLIDAYDATE, hDate);
+
+        db.insert(PUBLICHOLIDAY,null,cv);
+    }
+    public void loadHoliday(){
+        int i = 0;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + PUBLICHOLIDAY;
+
+        Cursor cursor = db.rawQuery(query, null);
+        try {
+            if (cursor.moveToFirst()) {
+
+                while (!cursor.isAfterLast()) {
+
+                    String a = cursor.getString(cursor.getColumnIndex(COLUMN_PHID));
+                    String b = cursor.getString(cursor.getColumnIndex(COLUMN_HOLIDAYNAME));
+                    String c = cursor.getString(cursor.getColumnIndex(COLUMN_HOLIDAYDATE));
+
+
+                    PublicHoliday pH = new PublicHoliday(a, b, c);
+                    publicHolidayArrayList.add(pH);
+
+                    Log.d("employeeLeaveAvailArr", publicHolidayArrayList.get(i).getHolidayName() +" " );
+                    i++;
+                    cursor.moveToNext();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public Database(Context context) {
         super(context, DATABASE_NAME, null , 1);
@@ -256,6 +355,8 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL("create table " + LEAVEDB + "("+ COLUMN_LTID +" TEXT PRIMARY KEY, "+ COLUMN_LEAVENAME +" TEXT, "+ COLUMN_DAYSAVAIL +" INTEGER)");
         db.execSQL("create table " + LEAVEAPPLICATION + "("+ COLUMN_LEAVEAPPID +" TEXT PRIMARY KEY, "+ COLUMN_EID +" TEXT, "+ COLUMN_TYPEOFLEAVE +" TEXT, "+ COLUMN_STARTDATE +" TEXT, "+ COLUMN_ENDDATE +" TEXT, "+ COLUMN_NOOFDAYS +" INTEGER, "+ COLUMN_APPROVALSTATUS +" TEXT )");
         db.execSQL("create table " + EMPLOYEELEAVEAVAIL + "("+ COLUMN_ELAID +" TEXT PRIMARY KEY, "+ COLUMN_EID +" TEXT, "+ COLUMN_TYPEOFLEAVE +" TEXT, "+ COLUMN_DAYSTAKEN +" TEXT, "+ COLUMN_DAYSAVAIL +" TEXT )");
+        db.execSQL("create table " + USERS + "("+ COLUMN_EID +" TEXT PRIMARY KEY, "+ COLUMN_CONTACTNUMBER +" TEXT, "+ COLUMN_GIVENNAME +" TEXT, "+ COLUMN_LASTNAME +" TEXT, "+ COLUMN_EMAIL +" TEXT, "+ COLUMN_EMPTYPE +" TEXT, "+ COLUMN_MANAGER +" TEXT)");
+        db.execSQL("create table " + PUBLICHOLIDAY + "("+ COLUMN_PHID +" TEXT PRIMARY KEY, "+ COLUMN_HOLIDAYNAME +" TEXT, "+ COLUMN_HOLIDAYDATE +" TEXT)");
 
 
     }

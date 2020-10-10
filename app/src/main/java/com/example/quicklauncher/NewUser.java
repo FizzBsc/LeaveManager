@@ -2,34 +2,38 @@ package com.example.quicklauncher;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
+import Model.Database;
+import Model.Employee;
+import Model.EmployeeLeaveAvailable;
+
 
 public class NewUser extends AppCompatActivity {
 
-    private EditText etEmployeeId;
-    private EditText etEmployeeType;
-    private EditText etDepartment;
-    private EditText etName;
-    private EditText etEmailId;
-    private EditText etPhoneNo;
-    private EditText etPassword;
-    private TextView tvEmployeeId;
-    private TextView tvEmployeeType;
-    private TextView tvDepartment;
-    private TextView tvName;
-    private TextView tvEmailId;
-    private TextView tvPhoneNo;
-    private TextView tvPassword;
-    Button btnSignUp;
+    EditText firstName;
+    EditText lastName;
+    EditText phone;
+    EditText email;
+    Spinner manager;
+    Spinner position;
 
-    boolean isValid = false;
+    Button createUser;
+
+    Database db = new Database(NewUser.this);
+
+    ArrayList<String> managerList = new ArrayList<>();
 
 
     @Override
@@ -37,77 +41,70 @@ public class NewUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_user);
 
-        etEmployeeId = findViewById(R.id.employeeIdET);
-        etEmployeeType = findViewById(R.id.employeeTypeET);
-        etDepartment = findViewById(R.id.departmentET);
-        etName = findViewById(R.id.nameET);
-        etEmailId = findViewById(R.id.emailIdET);
-        etPhoneNo = findViewById(R.id.phoneET);
-        etPassword = findViewById(R.id.passwordET);
-        tvEmployeeId = findViewById(R.id.employeeIdTV);
-        tvEmployeeType = findViewById(R.id.employeeTypeTV);
-        tvDepartment = findViewById(R.id.departmentTV);
-        tvName = findViewById(R.id.nameTV);
-        tvEmailId = findViewById(R.id.emailTV);
-        tvPhoneNo = findViewById(R.id.phoneTV);
-        tvPassword = findViewById(R.id.password1TV);
-        btnSignUp =(Button) findViewById(R.id.signUpButton);
+        firstName = findViewById(R.id.firstNameText);
+        lastName = findViewById(R.id.lastNameText);
+        phone = findViewById(R.id.phoneText);
+        email = findViewById(R.id.emailText);
+        manager = findViewById(R.id.managerSpinner);
+        position = findViewById(R.id.positionSpinner);
 
-        //etEmployeeId.setText("e00001");
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
+        createUser =(Button) findViewById(R.id.createButton);
+
+        if (db.user.size() != 0){
+            for (int i = 0; i < db.user.size(); i++){
+                if (db.user.get(i).getEmploymentType().equals("manager")||db.user.get(i).getEmploymentType().equals("admin")){
+                    managerList.add(db.user.get(i).getEmployeeID());
+                }
+            }
+        }
+
+        ArrayAdapter<String> managedBy = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, managerList);
+        ArrayAdapter<String> typeOfemp = new ArrayAdapter<String>(NewUser.this,
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.employeeType));
+        typeOfemp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        manager.setAdapter(managedBy);
+        position.setAdapter(typeOfemp);
+        createUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String inputEmployeeId = etEmployeeId.getText().toString();
-                String inputEmployeeType = etEmployeeType.getText().toString();
-                String inputDepartment = etDepartment.getText().toString();
-                String inputName = etName.getText().toString();
-                String inputEmailId = etEmailId.getText().toString();
-                String inputPhoneNo = etPhoneNo.getText().toString();
-                String inputPassword = etPassword.getText().toString();
 
-                if (inputEmployeeId.charAt(0) != 'e' && !(inputEmployeeId.length() == 6)) {
-                    Toast.makeText(NewUser.this, "Employee Id should start with e and should be 6 characters long.", Toast.LENGTH_SHORT).show();
-                    isValid = false;
-                }
-                else if (!(inputEmployeeType.equalsIgnoreCase("Admin"))) {
-                    Toast.makeText(NewUser.this, "Employee Type can be only of Admin as for others type admin will create login details.", Toast.LENGTH_SHORT).show();
-                    isValid = false;
-                }
-                else if (inputPhoneNo.length() != 10 && inputPhoneNo.charAt(0) != '0') {
-                    Toast.makeText(NewUser.this, "Phone number should start with 0 and should be 10 characters long.", Toast.LENGTH_SHORT).show();
-                    isValid = false;
-                }
-                else if (!(inputPassword.length() <= 12 && inputPassword.length() >= 8)) {
-                    Toast.makeText(NewUser.this, "Password should be in between 8 - 12 characters/numbers.", Toast.LENGTH_SHORT).show();
-                    isValid = false;
-                }
-                else if (inputEmployeeId.isEmpty() || inputEmployeeType.isEmpty() ||
-                        inputDepartment.isEmpty() || inputName.isEmpty() || inputEmailId.isEmpty() ||
-                        inputPhoneNo.isEmpty() || inputPassword.isEmpty()) {
-                    Toast.makeText(NewUser.this, "Please fill all the fields.", Toast.LENGTH_SHORT).show();
-                    isValid = false;
-                }
-                else {
-                    isValid = true;
-                }
-                if(!isValid){
-                    Toast.makeText(NewUser.this, "Some of the Credentials are not correct.", Toast.LENGTH_SHORT).show();
-                    btnSignUp.setEnabled(false);
+                if (!TextUtils.isEmpty(firstName.getText().toString()) && !TextUtils.isEmpty(lastName.getText().toString()) && !TextUtils.isEmpty(phone.getText().toString()) && !TextUtils.isEmpty(email.getText().toString())) {
+                    String fName = firstName.getText().toString();
+                    String lName = lastName.getText().toString();
+                    int pNo = Integer.parseInt(phone.getText().toString());
+                    String mail = email.getText().toString();
+                    String eid = "EMP" + (Database.user.size()+1);
+                    String manID = manager.getSelectedItem().toString();
+                    String pos = position.getSelectedItem().toString();
 
-                    //Add the code to go to new activity
-                    Intent intent = new Intent(NewUser.this, NewUser.class);
-                    startActivity(intent);
-                }
-                else {
-                    Toast.makeText(NewUser.this, "SignUp Successful.", Toast.LENGTH_SHORT).show();
+                    Employee newEmp = new Employee(eid,pNo,fName,lName,mail,pos,manID);
+                    db.user.add(newEmp);
+                    db.addUser(eid,Integer.toString(pNo),fName,lName,mail,pos,manID);
+                    Log.d("user added ", eid + " " +fName+ " " + lName + " " +pNo+ " " +mail+ " " + manID+ " " +pos );
+                    db.addPassword(eid,"password");
+                    Log.d("password added", "yup");
+                    EmployeeLeaveAvailable ela = new EmployeeLeaveAvailable();
+                    addNewUserHolidays(eid);
+                    Log.d("all done", "really");
+                    Toast.makeText(NewUser.this, eid +" created",Toast.LENGTH_LONG).show();
+                    Intent startIntent = new Intent(getApplicationContext(),MainMenu.class);
+                    startActivity(startIntent);
 
-                    //Add the code to go to new activity
-                    Intent intent = new Intent(NewUser.this, Login.class);
-                    startActivity(intent);
                 }
+
             }
 
 
         });
+    }
+    public void addNewUserHolidays(String a){
+        Log.d("works here", "works here");
+        for (int i = 0; i < Database.leaveTypeDBArr.size(); i++) {
+            Log.d("works here again", Database.leaveTypeDBArr.get(i).getLeaveName());
+            Database.employeeLeaveAvailArr.add(new EmployeeLeaveAvailable(a + Database.leaveTypeDBArr.get(i).getlTID(), a, Database.leaveTypeDBArr.get(i).getLeaveName(), 0, Database.leaveTypeDBArr.get(i).getDaysAvail()));
+            db.addEmployeeLeaveAvailable(a + Database.leaveTypeDBArr.get(i).getlTID(), a, Database.leaveTypeDBArr.get(i).getLeaveName(), 0, Database.leaveTypeDBArr.get(i).getDaysAvail());
+        }
+
     }
 }

@@ -83,6 +83,7 @@ public class AddPublicHoliday extends AppCompatActivity {
 
                     PublicHoliday ph = new PublicHoliday(holidayID, holidayName, holidayDate);
                     db.publicHolidayArrayList.add(ph);
+                    db.addHoliday(holidayID,holidayName,holidayDate);
                     for (int i = 0; i < db.publicHolidayArrayList.size(); i++) {
                         Log.d("public Holidays", db.publicHolidayArrayList.get(i).getpHId() + " " + db.publicHolidayArrayList.get(i).getHolidayName() + " " + db.publicHolidayArrayList.get(i).getHolidayDate());
                     }
