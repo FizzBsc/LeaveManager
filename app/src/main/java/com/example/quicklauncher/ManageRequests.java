@@ -78,7 +78,7 @@ public class ManageRequests extends AppCompatActivity {
                     dlgAlert.setTitle("Leave Manager");
                     dlgAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            sendEmail();
+                            sendEmail(position);
                             //dismiss the dialog
                         }
                     });
@@ -191,9 +191,9 @@ public class ManageRequests extends AppCompatActivity {
 
         }
 
-        public void sendEmail(){
+        public void sendEmail(int position){
             Intent email = new Intent(Intent.ACTION_SEND);
-            email.putExtra(Intent.EXTRA_EMAIL, new String[]{ "Bsc.hhafiz@gmail.com"});
+            email.putExtra(Intent.EXTRA_EMAIL, new String[]{ Database.user.get(position).getEmail()});
             email.putExtra(Intent.EXTRA_SUBJECT, "Leave Request");
             email.putExtra(Intent.EXTRA_TEXT, "Your request has been approved!");
 
