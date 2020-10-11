@@ -1,7 +1,5 @@
 package com.example.quicklauncher;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +12,7 @@ import Model.Database;
 
 public class MainMenu extends AppCompatActivity {
 
+    Database db = new Database(MainMenu.this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +27,13 @@ public class MainMenu extends AppCompatActivity {
             public void onClick(View view) {
                 Intent startIntent = new Intent(getApplicationContext(),Login.class);
                 startActivity(startIntent);
+                db.passwordArr.clear();
+                db.employeeLeaveAvailArr.clear();
+                db.leaveTypeDBArr.clear();
+                db.leaveApplicationDBArr.clear();
+                db.user.clear();
+                db.publicHolidayArrayList.clear();
+
                 finish();
             }
         });
