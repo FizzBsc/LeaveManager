@@ -49,6 +49,7 @@ public class ChangePassword extends AppCompatActivity {
                             //add dialog box if there's time
                             Intent startIntent = new Intent(getApplicationContext(), Login.class);
                             startActivity(startIntent);
+                            finish();
                         }
                     }
                 }

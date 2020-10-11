@@ -51,6 +51,7 @@ public class EditLeave extends AppCompatActivity {
 
                 Intent startIntent = new Intent(getApplicationContext(),ViewLeaveTypes.class);
                 startActivity(startIntent);
+                finish();
             }
         });
 
@@ -60,6 +61,7 @@ public class EditLeave extends AppCompatActivity {
             public void onClick(View view) {
                 Intent startIntent = new Intent(getApplicationContext(),ViewLeaveTypes.class);
                 startActivity(startIntent);
+                finish();
             }
         });
 

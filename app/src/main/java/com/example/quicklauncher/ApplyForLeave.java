@@ -141,6 +141,7 @@ public class ApplyForLeave extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), leaveName + " is now pending approval", Toast.LENGTH_SHORT).show();
                             Intent startIntent = new Intent(getApplicationContext(), MainMenu.class);
                             startActivity(startIntent);
+                            finish();
                         }
                     } else{
                         messageView.setError(" ");
@@ -162,6 +163,7 @@ public class ApplyForLeave extends AppCompatActivity {
             public void onClick(View view) {
                 Intent startIntent = new Intent(getApplicationContext(),MainMenu.class);
                 startActivity(startIntent);
+                finish();
             }
         });
     }

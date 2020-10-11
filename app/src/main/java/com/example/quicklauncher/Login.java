@@ -1,5 +1,7 @@
 package com.example.quicklauncher;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -88,12 +90,13 @@ public class Login extends AppCompatActivity {
 
                 if (checkPassword(eid,password) == true){
                     if (checkNewUser(eid) == false) {
-                        Intent startIntent = new Intent(getApplicationContext(), MainMenu.class);
-                        startActivity(startIntent);
+                        checkAnnualLeave();
+
 
                     } else if(checkNewUser(eid) == true){
                         Intent startIntent = new Intent(getApplicationContext(), ChangePassword.class);
                         startActivity(startIntent);
+                        finish();
                     }
                 } else if (checkPassword(eid,password) == false){
                     empPasswordField.setError("Wrong Password");
@@ -134,6 +137,27 @@ public class Login extends AppCompatActivity {
         }
         return true;
     }
-
+    public void checkAnnualLeave(){
+        for (int i = 0; i<Database.employeeLeaveAvailArr.size(); i++){//PBI6
+            if (Database.employeeLeaveAvailArr.get(i).geteID().equals(Login.eid)){
+                if (Database.employeeLeaveAvailArr.get(i).getTypeOfLeave().equals("Annual Leave")){
+                    if(Database.employeeLeaveAvailArr.get(i).getDaysTaken()==0){
+                        AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(Login.this);
+                        dlgAlert.setMessage("You have not taken any Annual Leave this year");
+                        dlgAlert.setTitle("Leave Manager");
+                        dlgAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent startIntent = new Intent(getApplicationContext(), MainMenu.class);
+                                startActivity(startIntent);
+                                finish();
+                            }
+                        });
+                        dlgAlert.setCancelable(true);
+                        dlgAlert.create().show();
+                    }
+                }
+            }
+        }
+    }
 
 }

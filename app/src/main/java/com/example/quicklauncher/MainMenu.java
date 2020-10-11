@@ -19,9 +19,18 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         String employeeType = empType(Login.eid);
 
-        checkAnnualLeave();
+        Button logout = (Button) findViewById(R.id.logoutButton);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent startIntent = new Intent(getApplicationContext(),Login.class);
+                startActivity(startIntent);
+                finish();
+            }
+        });
 
         Button leaveHistryBtn = (Button) findViewById(R.id.leaveHistoryBtn);
         leaveHistryBtn.setOnClickListener(new View.OnClickListener() {
@@ -154,26 +163,7 @@ public class MainMenu extends AppCompatActivity {
         }
             return false;
     }
-    public void checkAnnualLeave(){
-        for (int i = 0; i<Database.employeeLeaveAvailArr.size(); i++){//PBI6
-            if (Database.employeeLeaveAvailArr.get(i).geteID().equals(Login.eid)){
-                if (Database.employeeLeaveAvailArr.get(i).getTypeOfLeave().equals("Annual Leave")){
-                    if(Database.employeeLeaveAvailArr.get(i).getDaysTaken()==0){
-                        AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(MainMenu.this);
-                        dlgAlert.setMessage("You have not taken any Annual Leave this year");
-                        dlgAlert.setTitle("Leave Manager");
-                        dlgAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                //dismiss the dialog
-                            }
-                        });
-                        dlgAlert.setCancelable(true);
-                        dlgAlert.create().show();
-                    }
-                }
-            }
-        }
-    }
+
     public String empType(String eid){
         String employeeType;
         for (int i = 0; i < Database.user.size(); i++){

@@ -90,6 +90,7 @@ public class NewUser extends AppCompatActivity {
                     Toast.makeText(NewUser.this, eid +" created",Toast.LENGTH_LONG).show();
                     Intent startIntent = new Intent(getApplicationContext(),MainMenu.class);
                     startActivity(startIntent);
+                    finish();
 
                 }
 
