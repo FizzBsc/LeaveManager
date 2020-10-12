@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -101,60 +102,65 @@ public class ApplyForLeave extends AppCompatActivity {
         submitLeavebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String d1 = startDateText.getText().toString();
-                String d2 = endDateText.getText().toString();
-                try {
-                    firstDate = df.parse(d1);
-                    secondDate = df.parse(d2);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                int i = dayCalc(firstDate,secondDate);
-                String s =  Integer.toString(i);
-                int m = 0;
-                String laID = null;
-                if (i>0) {
-                    int iDCount = 0;
-                    leaveName = leaveSpinner.getSelectedItem().toString();
-                    for (int j = 0; j < Database.employeeLeaveAvailArr.size(); j++){
-                        if ( Database.employeeLeaveAvailArr.get(j).getTypeOfLeave().equals(leaveName) &&  Login.eid.equals(Database.employeeLeaveAvailArr.get(j).geteID())) {
-                            for (int k = 0; k < Database.leaveApplicationDBArr.size(); k++) {
-                                if (!(leaveName.equals(Database.leaveApplicationDBArr.get(k).getTypeOfLeave()))) {
-                                    iDCount = 0;
-                                } else if (leaveName.equals(Database.leaveApplicationDBArr.get(k).getTypeOfLeave())) {
-                                    iDCount++;
+                if (!TextUtils.isEmpty(startDateText.getText().toString()) && !TextUtils.isEmpty(endDateText.getText().toString())) {
+                    String d1 = startDateText.getText().toString();
+                    String d2 = endDateText.getText().toString();
+                    try {
+                        firstDate = df.parse(d1);
+                        secondDate = df.parse(d2);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    int i = dayCalc(firstDate, secondDate);
+                    String s = Integer.toString(i);
+                    int m = 0;
+                    String laID = null;
+                    if (i > 0) {
+                        int iDCount = 0;
+                        leaveName = leaveSpinner.getSelectedItem().toString();
+                        for (int j = 0; j < Database.employeeLeaveAvailArr.size(); j++) {
+                            if (Database.employeeLeaveAvailArr.get(j).getTypeOfLeave().equals(leaveName) && Login.eid.equals(Database.employeeLeaveAvailArr.get(j).geteID())) {
+                                for (int k = 0; k < Database.leaveApplicationDBArr.size(); k++) {
+                                    if (!(leaveName.equals(Database.leaveApplicationDBArr.get(k).getTypeOfLeave()))) {
+                                        iDCount = 0;
+                                    } else if (leaveName.equals(Database.leaveApplicationDBArr.get(k).getTypeOfLeave())) {
+                                        iDCount++;
+                                    }
+
                                 }
+                                laID = Database.employeeLeaveAvailArr.get(j).geteLAID() + iDCount;
+
+                                m = Database.employeeLeaveAvailArr.get(j).getDaysAvail();
 
                             }
-                            laID = Database.employeeLeaveAvailArr.get(j).geteLAID()+ iDCount;
-
-                            m = Database.employeeLeaveAvailArr.get(j).getDaysAvail();
-
                         }
-                    }
-                    if (m > i) {
-                        LeaveApplication la = new LeaveApplication(laID, Login.eid, leaveName, d1, d2, i, "pending");
-                        db.leaveApplicationDBArr.add(la);
-                        db.addLeaveApplication(laID, Login.eid, leaveName, d1, d2, i, "pending");
-                        for (int z = 0; z<Database.leaveApplicationDBArr.size(); z++) {
-                            Log.d("Leave approved", iDCount +" "+Database.leaveApplicationDBArr.get(z).leaveAppID +" "+Database.leaveApplicationDBArr.get(z).eID);
-                            Toast.makeText(getApplicationContext(), leaveName + " is now pending approval", Toast.LENGTH_SHORT).show();
-                            Intent startIntent = new Intent(getApplicationContext(), MainMenu.class);
-                            startActivity(startIntent);
-                            finish();
+                        if (m > i) {
+                            LeaveApplication la = new LeaveApplication(laID, Login.eid, leaveName, d1, d2, i, "pending");
+                            db.leaveApplicationDBArr.add(la);
+                            db.addLeaveApplication(laID, Login.eid, leaveName, d1, d2, i, "pending");
+                            for (int z = 0; z < Database.leaveApplicationDBArr.size(); z++) {
+                                Log.d("Leave approved", iDCount + " " + Database.leaveApplicationDBArr.get(z).leaveAppID + " " + Database.leaveApplicationDBArr.get(z).eID);
+                                Toast.makeText(getApplicationContext(), leaveName + " is now pending approval", Toast.LENGTH_SHORT).show();
+                                Intent startIntent = new Intent(getApplicationContext(), MainMenu.class);
+                                startActivity(startIntent);
+                                finish();
+                            }
+                        } else {
+                            messageView.setError(" ");
+                            messageView.setTextColor(Color.RED);
+                            messageView.setText("You do not have enough days avail");
                         }
-                    } else{
+
+                    } else if (i <= 0) {
                         messageView.setError(" ");
                         messageView.setTextColor(Color.RED);
-                        messageView.setText("You do not have enough days avail");
+                        messageView.setText("End Date is before Start Date");
                     }
+                    Log.d("numberOfDays", Integer.toString(i));
+                }else{
+                    Toast.makeText(getApplicationContext(), "Fields cannot be empty", Toast.LENGTH_SHORT).show();
 
-                }else if (i<=0){
-                    messageView.setError(" ");
-                    messageView.setTextColor(Color.RED);
-                    messageView.setText("End Date is before Start Date");
                 }
-                Log.d("numberOfDays", Integer.toString(i));
             }
         });
         cancelBut = (Button) findViewById(R.id.cancelBut);
