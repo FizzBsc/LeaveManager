@@ -41,7 +41,7 @@ public class Login extends AppCompatActivity {
         StartProg sp= new StartProg();
         sp.setup();
         if (Database.passwordArr.size()==0){
-            d.addPassword("b","123");
+            d.addPassword("B","123");
             d.passwordArr.get(0).setNewEmp(false);
         }
 
