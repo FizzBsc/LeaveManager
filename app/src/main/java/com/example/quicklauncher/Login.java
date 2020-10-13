@@ -1,7 +1,5 @@
 package com.example.quicklauncher;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -51,16 +50,16 @@ public class Login extends AppCompatActivity {
 
 
 
-        for (int i = 0; i <Database.leaveApplicationDBArr.size();i++ ){
-            Log.d("leave Applications",  Database.leaveApplicationDBArr.get(i).getLeaveAppID() +" "+Database.leaveApplicationDBArr.get(i).getApprovalStatus());
-
-        }
-        for(int x = 0; x < Database.leaveTypeDBArr.size();x++) {
-            Log.d("checkLeaveType", Database.leaveTypeDBArr.get(x).getLeaveName());
-        }
-        for (int i = 0; i <d.passwordArr.size();i++) {
-            Log.d("password", d.passwordArr.get(i).getEID() +" "+d.passwordArr.get(i).getPassword());
-        }
+//        for (int i = 0; i <Database.leaveApplicationDBArr.size();i++ ){
+//            Log.d("leave Applications",  Database.leaveApplicationDBArr.get(i).getLeaveAppID() +" "+Database.leaveApplicationDBArr.get(i).getApprovalStatus());
+//
+//        }
+//        for(int x = 0; x < Database.leaveTypeDBArr.size();x++) {
+//            Log.d("checkLeaveType", Database.leaveTypeDBArr.get(x).getLeaveName());
+//        }
+//        for (int i = 0; i <d.passwordArr.size();i++) {
+//            Log.d("password", d.passwordArr.get(i).getEID() +" "+d.passwordArr.get(i).getPassword());
+//        }
         for (int i = 0; i < Database.employeeLeaveAvailArr.size(); i++){
             Log.d("Leave avail", d.employeeLeaveAvailArr.get(i).geteID());
 
@@ -74,7 +73,7 @@ public class Login extends AppCompatActivity {
                 d.employeeLeaveAvailArr.remove(i);
             }
 
-            Log.d("added here ", d.employeeLeaveAvailArr.get(i).geteLAID() + " " + Database.employeeLeaveAvailArr.get(i).geteID() + " " + Database.employeeLeaveAvailArr.get(i).getTypeOfLeave() + " " + Database.employeeLeaveAvailArr.get(i).getDaysAvail() + " " + Database.employeeLeaveAvailArr.get(i).getDaysTaken());
+            //Log.d("added here ", d.employeeLeaveAvailArr.get(i).geteLAID() + " " + Database.employeeLeaveAvailArr.get(i).geteID() + " " + Database.employeeLeaveAvailArr.get(i).getTypeOfLeave() + " " + Database.employeeLeaveAvailArr.get(i).getDaysAvail() + " " + Database.employeeLeaveAvailArr.get(i).getDaysTaken());
         }
 
         loginButton = (Button) findViewById(R.id.loginButton);
@@ -91,6 +90,10 @@ public class Login extends AppCompatActivity {
                 if (checkPassword(eid,password) == true){
                     if (checkNewUser(eid) == false) {
                         checkAnnualLeave();
+                        Intent startIntent = new Intent(getApplicationContext(), MainMenu.class);
+                        startActivity(startIntent);
+                        finish();
+
 
 
                     } else if(checkNewUser(eid) == true){
@@ -137,27 +140,20 @@ public class Login extends AppCompatActivity {
         }
         return true;
     }
-    public void checkAnnualLeave(){
-        for (int i = 0; i<Database.employeeLeaveAvailArr.size(); i++){//PBI6
-            if (Database.employeeLeaveAvailArr.get(i).geteID().equals(Login.eid)){
-                if (Database.employeeLeaveAvailArr.get(i).getTypeOfLeave().equals("Annual Leave")){
-                    if(Database.employeeLeaveAvailArr.get(i).getDaysTaken()==0){
-                        AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(Login.this);
-                        dlgAlert.setMessage("You have not taken any Annual Leave this year");
-                        dlgAlert.setTitle("Leave Manager");
-                        dlgAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent startIntent = new Intent(getApplicationContext(), MainMenu.class);
-                                startActivity(startIntent);
-                                finish();
-                            }
-                        });
-                        dlgAlert.setCancelable(true);
-                        dlgAlert.create().show();
+    public void checkAnnualLeave() {
+        for (int i = 0; i < Database.employeeLeaveAvailArr.size(); i++) {//PBI6
+            Log.d("yup", eid);
+
+            if (Database.employeeLeaveAvailArr.get(i).geteID().equals(eid)) {
+                Log.d("yup", Database.employeeLeaveAvailArr.get(i).geteID());
+
+                if (Database.employeeLeaveAvailArr.get(i).getTypeOfLeave().equals("Annual Leave")) {
+                    if (Database.employeeLeaveAvailArr.get(i).getDaysTaken() == 0) {
+                        Toast.makeText(Login.this, "You have not taken any leave",Toast.LENGTH_LONG).show();
+
                     }
                 }
             }
         }
     }
-
 }
