@@ -81,6 +81,7 @@ public class EditEmployee extends AppCompatActivity {
 
                 newEmpType = employmentTypeSpinner.getSelectedItem().toString();
                 db.user.get(position).setEmploymentType(newEmpType);
+                db.updateEmpType(db.user.get(position).getEmployeeID(),newEmpType);
                 Log.d("empType",db.user.get(position).getEmploymentType());
                 Toast.makeText(getApplicationContext(), db.user.get(position).getEmployeeID() +" updated" , Toast.LENGTH_SHORT).show();
                 Intent startIntent = new Intent(getApplicationContext(), StaffList.class);

@@ -69,6 +69,7 @@ public class Database extends SQLiteOpenHelper {
         cv.put(COLUMN_ISNEWEMP, "true");
 
         db.insert(PASSWORDB,null,cv);
+        db.close();
     }
 
     public void addLeaveType() {
@@ -84,13 +85,15 @@ public class Database extends SQLiteOpenHelper {
 
             db.insert(LEAVEDB, null, cv);
             Log.d("QuickLauncher", "added" +  leaveTypeDBArr.get(i).leaveName);
+            db.close();
+
         }
     }
     public void updateNewUsr(String id,String pass, String i){
         SQLiteDatabase db = this.getWritableDatabase();
         String strSQL = "UPDATE " + PASSWORDB + " SET " + COLUMN_ISNEWEMP + " = '" + i + "'," + COLUMN_PASSWORD + " = '" + pass + "'" + " WHERE " + COLUMN_PID + " = '" + id +"'";
         db.execSQL(strSQL);
-
+        db.close();
 
     }
     public void loadLeaveTypeToArr(){
@@ -119,12 +122,15 @@ public class Database extends SQLiteOpenHelper {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        db.close();
+
     }
     public void updateLeaveType(String id, int days){
         SQLiteDatabase db = this.getWritableDatabase();
         String strSQL = "UPDATE " + LEAVEDB + " SET " + COLUMN_DAYSAVAIL + " = '" + days + "'" + " WHERE " + COLUMN_LTID + " = '" + id +"'";
         db.execSQL(strSQL);
 
+        db.close();
 
     }
     public void loadPassToArr(){
@@ -169,6 +175,8 @@ public class Database extends SQLiteOpenHelper {
         cv.put(COLUMN_APPROVALSTATUS, approvalStatus);
 
         db.insert(LEAVEAPPLICATION,null,cv);
+        db.close();
+
     }
     public void loadLeaveApplicationToArr(){
         int i = 0;
@@ -200,11 +208,22 @@ public class Database extends SQLiteOpenHelper {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        db.close();
+
     }
     public void updateLeaveApplication(String status, String id){
         SQLiteDatabase db = this.getWritableDatabase();
         String strSQL = "UPDATE " + LEAVEAPPLICATION + " SET " + COLUMN_APPROVALSTATUS + " = '" + status + "'" + " WHERE " + COLUMN_LEAVEAPPID + " = '" + id +"'";
         db.execSQL(strSQL);
+        db.close();
+
+    }
+    public void updateEmpType(String id, String newemp){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String strSQL = "UPDATE " + USERS + " SET " + COLUMN_EMPTYPE + " = '" + newemp + "'" + " WHERE " + COLUMN_EID + " = '" + id +"'";
+        db.execSQL(strSQL);
+        db.close();
+
     }
 
     public void addEmployeeLeaveAvailable(String leaveAppID, String eID, String typeOfLeave, int daysTaken, int daysAvail){
@@ -220,6 +239,8 @@ public class Database extends SQLiteOpenHelper {
         cv.put(COLUMN_DAYSAVAIL, daysAvail);
 
         db.insert(EMPLOYEELEAVEAVAIL,null,cv);
+        db.close();
+
     }
     public void loadEmployeeLeaveAvailable(){
         int i = 0;
@@ -250,11 +271,15 @@ public class Database extends SQLiteOpenHelper {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        db.close();
+
     }
     public void updateEmployeeLeaveAvailable(int daysTaken, int daysAvail,  String id){
         SQLiteDatabase db = this.getWritableDatabase();
         String strSQL = "UPDATE " + EMPLOYEELEAVEAVAIL + " SET " + COLUMN_DAYSTAKEN + " = '" + daysTaken + "'," + COLUMN_DAYSAVAIL + " = '" + daysAvail + "'"+"  WHERE " + COLUMN_ELAID + " = '" + id +"'";
         db.execSQL(strSQL);
+        db.close();
+
     }
     public void addUser(String eid, String contactNo, String givenName, String lastName, String email,String empType, String manager){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -270,6 +295,8 @@ public class Database extends SQLiteOpenHelper {
 
 
         db.insert(USERS,null,cv);
+        db.close();
+
     }
 
     public void loadUser(){
@@ -303,6 +330,8 @@ public class Database extends SQLiteOpenHelper {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        db.close();
+
     }
 
     public void addHoliday(String phid, String hName, String hDate){
@@ -314,6 +343,8 @@ public class Database extends SQLiteOpenHelper {
         cv.put(COLUMN_HOLIDAYDATE, hDate);
 
         db.insert(PUBLICHOLIDAY,null,cv);
+        db.close();
+
     }
     public void loadHoliday(){
         int i = 0;
@@ -342,6 +373,8 @@ public class Database extends SQLiteOpenHelper {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        db.close();
+
     }
 
     public Database(Context context) {

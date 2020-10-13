@@ -72,6 +72,7 @@ public class StaffList extends AppCompatActivity {
                     Intent startIntent = new Intent(getApplicationContext(),EditEmployee.class);
                     startIntent.putExtra("ID", finalId);
                     startActivity(startIntent);
+                    finish();
                 }
             });
             for (int i = 0; i < Database.user.size(); i++){
