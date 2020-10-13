@@ -23,27 +23,13 @@
         android:id="@+id/firstNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="34dp"
-        android:layout_marginLeft="34dp"
-        android:layout_marginTop="10dp"
-
-        android:text="TextView"
-        android:textColor="@android:color/black" />
-
-    <TextView
-        android:id="@+id/lastNameText"
-        android:layout_width="248dp"
-        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="56dp"
-        android:layout_marginLeft="56dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="11dp"
-        android:layout_marginRight="11dp"
-        android:layout_toEndOf="@+id/firstNameText"
-        android:layout_toRightOf="@+id/firstNameText"
+        android:layout_toEndOf="@+id/idView"
+        android:layout_toRightOf="@+id/idView"
         android:text="TextView"
         android:textColor="@android:color/black" />
 
@@ -65,7 +51,7 @@
 
     <TextView
         android:id="@+id/empLevelText"
-        android:layout_width="63dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/notifyPersonView"
         android:layout_alignParentStart="true"
@@ -81,12 +67,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/notifyPersonView"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="20dp"
         android:layout_toEndOf="@+id/empLevelText"
         android:layout_toRightOf="@+id/empLevelText"
         android:text="TextView"
         android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/idView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="10dp"
+        android:text="TextView"
+        android:textColor="#000000" />
 
 </RelativeLayout>

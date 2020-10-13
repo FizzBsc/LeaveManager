@@ -56,8 +56,8 @@ public class StaffList extends AppCompatActivity {
             convertView = getLayoutInflater().inflate(R.layout.customuserlayout, null);
 
             RelativeLayout rl = (RelativeLayout) convertView.findViewById(R.id.relativeLayout2);
+            TextView idView = (TextView) convertView.findViewById(R.id.idView);
             TextView firstNameText = (TextView) convertView.findViewById(R.id.firstNameText);
-            TextView lastNameText = (TextView) convertView.findViewById(R.id.lastNameText);
             TextView emailText = (TextView) convertView.findViewById(R.id.emailText);
             TextView empStatus = (TextView) convertView.findViewById(R.id.notifyPersonView);
             TextView empLevelText = (TextView) convertView.findViewById(R.id.empLevelText);
@@ -83,23 +83,23 @@ public class StaffList extends AppCompatActivity {
             if (role.equals("manager") || role.equals("admin")) {//!!!!!!!!!!!!!!!! set manager and admin here
                 if (role.equals("admin")) {
                     rl.setVisibility(RelativeLayout.VISIBLE);
-                    firstNameText.setText(Database.user.get(position).getGivenName());
-                    lastNameText.setText(Database.user.get(position).getLastName());
+                    idView.setText(Database.user.get(position).getEmployeeID());
+                    firstNameText.setText(Database.user.get(position).getGivenName()+ " "+ Database.user.get(position).getLastName());
                     emailText.setText(Database.user.get(position).getEmail());
                     empStatus.setText("Current employee: " + Database.user.get(position).isStatus());
                     empLevelText.setText(Database.user.get(position).getEmploymentType());
                 }else if (role.equals("manager")){
                     if (Database.user.get(position).getManagedBy().equals(Login.eid)){
+                        idView.setText(Database.user.get(position).getEmployeeID());
                         rl.setVisibility(RelativeLayout.VISIBLE);
-                        firstNameText.setText(Database.user.get(position).getGivenName());
-                        lastNameText.setText(Database.user.get(position).getLastName());
+                        firstNameText.setText(Database.user.get(position).getGivenName()+ " "+ Database.user.get(position).getLastName());
                         emailText.setText(Database.user.get(position).getEmail());
                         empStatus.setText("Current employee: " + Database.user.get(position).isStatus());
                         empLevelText.setText(Database.user.get(position).getEmploymentType());
                     } else{
                         rl.setVisibility(RelativeLayout.GONE);
+                        idView.setVisibility(RelativeLayout.GONE);
                         firstNameText.setVisibility(View.GONE);
-                        lastNameText.setVisibility(View.GONE);
                         emailText.setVisibility(View.GONE);
                         empLevelText.setVisibility(View.GONE);
                         empStatus.setVisibility(View.GONE);
@@ -109,13 +109,13 @@ public class StaffList extends AppCompatActivity {
 
 
             }else{
-                    rl.setVisibility(RelativeLayout.GONE);
-                    firstNameText.setVisibility(View.GONE);
-                    lastNameText.setVisibility(View.GONE);
-                    emailText.setVisibility(View.GONE);
-                    empLevelText.setVisibility(View.GONE);
-                    empStatus.setVisibility(View.GONE);
-                    editBut.setVisibility(View.GONE);
+                rl.setVisibility(RelativeLayout.GONE);
+                idView.setVisibility(RelativeLayout.GONE);
+                firstNameText.setVisibility(View.GONE);
+                emailText.setVisibility(View.GONE);
+                empLevelText.setVisibility(View.GONE);
+                empStatus.setVisibility(View.GONE);
+                editBut.setVisibility(View.GONE);
 
             }
             return convertView;

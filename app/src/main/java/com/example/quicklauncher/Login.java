@@ -82,7 +82,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                eid = eIDField.getText().toString();
+                eid = eIDField.getText().toString().toUpperCase();
                 password = empPasswordField.getText().toString();
 
 
