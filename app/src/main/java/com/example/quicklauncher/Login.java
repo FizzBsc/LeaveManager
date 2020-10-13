@@ -86,7 +86,7 @@ public class Login extends AppCompatActivity {
                 password = empPasswordField.getText().toString();
 
 
-            if(isEmployee(eid)==true) {
+            if(isCurrentEmployee(eid)==true) {
                 if (checkPassword(eid, password) == true) {
                     if (checkNewUser(eid) == false) {
                         checkAnnualLeave();
@@ -145,7 +145,7 @@ public class Login extends AppCompatActivity {
         }
         return true;
     }
-    public boolean isEmployee(String eid){
+    public boolean isCurrentEmployee(String eid){
         for( int i = 0; i <Database.user.size();i++){
             if( Database.user.get(i).getEmployeeID().equals(eid)){
                 if(Database.user.get(i).isStatus()==true){
