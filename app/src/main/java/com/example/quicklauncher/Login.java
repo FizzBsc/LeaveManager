@@ -60,8 +60,8 @@ public class Login extends AppCompatActivity {
         for (int i = 0; i <d.passwordArr.size();i++) {
             Log.d("password", d.passwordArr.get(i).getEID() +" "+d.passwordArr.get(i).getPassword());
         }
-        for (int i = 0; i < Database.employeeLeaveAvailArr.size(); i++){
-            Log.d("Leave avail", d.employeeLeaveAvailArr.get(i).geteID());
+        for (int i = 0; i < Database.user.size(); i++){
+            Log.d("emp STATUS", d.user.get(i).getEmployeeID()+" "+ d.user.get(i).isStatus() );
 
         }
 
@@ -86,8 +86,8 @@ public class Login extends AppCompatActivity {
                 password = empPasswordField.getText().toString();
 
 
-
-                if (checkPassword(eid,password) == true){
+            if(isEmployee(eid)==true) {
+                if (checkPassword(eid, password) == true) {
                     if (checkNewUser(eid) == false) {
                         checkAnnualLeave();
                         Intent startIntent = new Intent(getApplicationContext(), MainMenu.class);
@@ -95,24 +95,29 @@ public class Login extends AppCompatActivity {
                         finish();
 
 
-
-                    } else if(checkNewUser(eid) == true){
+                    } else if (checkNewUser(eid) == true) {
                         Intent startIntent = new Intent(getApplicationContext(), ChangePassword.class);
                         startActivity(startIntent);
                         finish();
                     }
-                } else if (checkPassword(eid,password) == false){
+                } else if (checkPassword(eid, password) == false) {
                     empPasswordField.setError("Wrong Password");
                     tries++;
                     triesText = (TextView) findViewById(R.id.passErrorText);
                     triesText.setError("");
                     triesText.setTextColor(Color.RED);
-                    triesText.setText("Attempt left:" + (3-tries));
-                    if (tries == 3){
+                    triesText.setText("Attempt left:" + (3 - tries));
+                    if (tries == 3) {
                         triesText.setText("You've been locked out please contact an Administrator");
+                        empLock(eid);
                     }
                 }
-
+            }else{
+                triesText = (TextView) findViewById(R.id.passErrorText);
+                triesText.setError("");
+                triesText.setTextColor(Color.RED);
+                triesText.setText("Your account is locked");
+            }
             }
         });
 
@@ -139,6 +144,27 @@ public class Login extends AppCompatActivity {
             }
         }
         return true;
+    }
+    public boolean isEmployee(String eid){
+        for( int i = 0; i <Database.user.size();i++){
+            if( Database.user.get(i).getEmployeeID().equals(eid)){
+                if(Database.user.get(i).isStatus()==true){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+    public void empLock(String eid){
+        Database db = new Database(Login.this);
+        for( int i = 0; i <Database.user.size();i++){
+            if( Database.user.get(i).getEmployeeID().equals(eid)){
+                Database.user.get(i).setStatus(false);
+                db.updateEmpStatus(eid,false);
+            }
+        }
     }
     public void checkAnnualLeave() {
         for (int i = 0; i < Database.employeeLeaveAvailArr.size(); i++) {//PBI6

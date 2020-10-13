@@ -12,7 +12,7 @@ public class StartProg {
 
 
 
-        Employee emp = new Employee("B",0430405557,"hafiz", "halid", "s@gmail.com", "admin", "a");
+        Employee emp = new Employee("B",0430405557,"hafiz", "halid", "s@gmail.com", "admin", "a",true);
 
         if (Database.leaveTypeDBArr.size() == 0) {
             LeaveTypeDB al = new LeaveTypeDB("1", "Annual Leave", 20);

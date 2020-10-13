@@ -66,10 +66,14 @@ public class EditEmployee extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked==true){
                     db.user.get(position).setStatus(true);
+                    Log.d("Set status", "works");
+                    db.updateEmpStatus(db.user.get(position).getEmployeeID(),true);
 
                     Toast.makeText(getApplicationContext(), "Is a current employee" , Toast.LENGTH_SHORT).show();
                 } else if(isChecked==false){
                     db.user.get(position).setStatus(false);
+                    db.updateEmpStatus(db.user.get(position).getEmployeeID(),false);
+
                     Toast.makeText(getApplicationContext(), "Is not a current employee" , Toast.LENGTH_SHORT).show();
 
                 }

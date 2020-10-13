@@ -12,7 +12,7 @@ public class Employee {
 
      boolean status; //if this is an active employee or not
 
-     public Employee(String employeeID, int contactNumber, String givenName, String lastName, String email, String employmentType,String managedBy) {
+     public Employee(String employeeID, int contactNumber, String givenName, String lastName, String email, String employmentType,String managedBy,Boolean status) {
 
           this.employeeID = employeeID;
           this.contactNumber = contactNumber;
@@ -21,7 +21,7 @@ public class Employee {
           this.email = email;
           this.employmentType = employmentType;
           this.managedBy = managedBy;
-          status = true;
+          this.status = status;
      }
 
      //---------------------------------------------------------------------

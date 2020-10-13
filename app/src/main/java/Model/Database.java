@@ -38,6 +38,8 @@ public class Database extends SQLiteOpenHelper {
     public static final String COLUMN_EMAIL = "EMAIL";
     public static final String COLUMN_EMPTYPE = "EMPTYPE";
     public static final String COLUMN_MANAGER = "MANAGER";
+    public static final String COLUMN_STATUS = "STATUS";
+
 
     public static final String COLUMN_PID = "ID";
     public static final String COLUMN_PASSWORD = "PASSWORD";
@@ -225,6 +227,13 @@ public class Database extends SQLiteOpenHelper {
         db.close();
 
     }
+    public void updateEmpStatus(String id, Boolean status){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String strSQL = "UPDATE " + USERS + " SET " + COLUMN_STATUS + " = '" + status + "'" + " WHERE " + COLUMN_EID + " = '" + id +"'";
+        db.execSQL(strSQL);
+        db.close();
+
+    }
 
     public void addEmployeeLeaveAvailable(String leaveAppID, String eID, String typeOfLeave, int daysTaken, int daysAvail){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -281,7 +290,7 @@ public class Database extends SQLiteOpenHelper {
         db.close();
 
     }
-    public void addUser(String eid, String contactNo, String givenName, String lastName, String email,String empType, String manager){
+    public void addUser(String eid, String contactNo, String givenName, String lastName, String email,String empType, String manager, Boolean status){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -292,6 +301,8 @@ public class Database extends SQLiteOpenHelper {
         cv.put(COLUMN_EMAIL, email);
         cv.put(COLUMN_EMPTYPE, empType);
         cv.put(COLUMN_MANAGER, manager);
+        cv.put(COLUMN_STATUS, status);
+
 
 
         db.insert(USERS,null,cv);
@@ -317,9 +328,8 @@ public class Database extends SQLiteOpenHelper {
                     String e = cursor.getString(cursor.getColumnIndex(COLUMN_EMAIL));
                     String f = cursor.getString(cursor.getColumnIndex(COLUMN_EMPTYPE));
                     String g = cursor.getString(cursor.getColumnIndex(COLUMN_MANAGER));
-
-
-                    Employee us = new Employee(a, b, c, d, e,f,g);
+                    Boolean h = Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex(COLUMN_STATUS)));
+                    Employee us = new Employee(a, b, c, d, e,f,g,h);
                     user.add(us);
 
                     Log.d("employeeLeaveAvailArr", user.get(i).getEmployeeID() +" " );
@@ -388,7 +398,7 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL("create table " + LEAVEDB + "("+ COLUMN_LTID +" TEXT PRIMARY KEY, "+ COLUMN_LEAVENAME +" TEXT, "+ COLUMN_DAYSAVAIL +" INTEGER)");
         db.execSQL("create table " + LEAVEAPPLICATION + "("+ COLUMN_LEAVEAPPID +" TEXT PRIMARY KEY, "+ COLUMN_EID +" TEXT, "+ COLUMN_TYPEOFLEAVE +" TEXT, "+ COLUMN_STARTDATE +" TEXT, "+ COLUMN_ENDDATE +" TEXT, "+ COLUMN_NOOFDAYS +" INTEGER, "+ COLUMN_APPROVALSTATUS +" TEXT )");
         db.execSQL("create table " + EMPLOYEELEAVEAVAIL + "("+ COLUMN_ELAID +" TEXT PRIMARY KEY, "+ COLUMN_EID +" TEXT, "+ COLUMN_TYPEOFLEAVE +" TEXT, "+ COLUMN_DAYSTAKEN +" TEXT, "+ COLUMN_DAYSAVAIL +" TEXT )");
-        db.execSQL("create table " + USERS + "("+ COLUMN_EID +" TEXT PRIMARY KEY, "+ COLUMN_CONTACTNUMBER +" TEXT, "+ COLUMN_GIVENNAME +" TEXT, "+ COLUMN_LASTNAME +" TEXT, "+ COLUMN_EMAIL +" TEXT, "+ COLUMN_EMPTYPE +" TEXT, "+ COLUMN_MANAGER +" TEXT)");
+        db.execSQL("create table " + USERS + "("+ COLUMN_EID +" TEXT PRIMARY KEY, "+ COLUMN_CONTACTNUMBER +" TEXT, "+ COLUMN_GIVENNAME +" TEXT, "+ COLUMN_LASTNAME +" TEXT, "+ COLUMN_EMAIL +" TEXT, "+ COLUMN_EMPTYPE +" TEXT, "+ COLUMN_MANAGER +" TEXT, "+ COLUMN_STATUS +" TEXT)");
         db.execSQL("create table " + PUBLICHOLIDAY + "("+ COLUMN_PHID +" TEXT PRIMARY KEY, "+ COLUMN_HOLIDAYNAME +" TEXT, "+ COLUMN_HOLIDAYDATE +" TEXT)");
 
 
