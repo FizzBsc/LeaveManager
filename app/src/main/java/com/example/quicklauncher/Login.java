@@ -59,7 +59,7 @@ public class Login extends AppCompatActivity {
             Log.d("checkLeaveType", Database.leaveTypeDBArr.get(x).getLeaveName());
         }
         for (int i = 0; i <d.passwordArr.size();i++) {
-            Log.d("password", d.passwordArr.get(i).getPassword());
+            Log.d("password", d.passwordArr.get(i).getEID() +" "+d.passwordArr.get(i).getPassword());
         }
         for (int i = 0; i < Database.employeeLeaveAvailArr.size(); i++){
             Log.d("Leave avail", d.employeeLeaveAvailArr.get(i).geteID());
