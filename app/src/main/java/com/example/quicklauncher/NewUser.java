@@ -80,7 +80,7 @@ public class NewUser extends AppCompatActivity {
 
                     Employee newEmp = new Employee(eid,pNo,fName,lName,mail,pos,manID,true);
                     db.user.add(newEmp);
-                    db.addUser(eid,Integer.toString(pNo),fName,lName,mail,pos,manID,true);
+                    db.addUser(eid,Integer.toString(pNo),fName,lName,mail,pos,manID,"true");
                     Log.d("user added ", eid + " " +fName+ " " + lName + " " +pNo+ " " +mail+ " " + manID+ " " +pos );
                     db.addPassword(eid,"password");
                     Log.d("password added", "yup");

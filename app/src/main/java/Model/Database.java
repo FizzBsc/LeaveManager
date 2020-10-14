@@ -290,7 +290,7 @@ public class Database extends SQLiteOpenHelper {
         db.close();
 
     }
-    public void addUser(String eid, String contactNo, String givenName, String lastName, String email,String empType, String manager, Boolean status){
+    public void addUser(String eid, String contactNo, String givenName, String lastName, String email,String empType, String manager, String status){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -328,7 +328,7 @@ public class Database extends SQLiteOpenHelper {
                     String e = cursor.getString(cursor.getColumnIndex(COLUMN_EMAIL));
                     String f = cursor.getString(cursor.getColumnIndex(COLUMN_EMPTYPE));
                     String g = cursor.getString(cursor.getColumnIndex(COLUMN_MANAGER));
-                    Boolean h = Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex(COLUMN_STATUS)));
+                    Boolean h = Boolean.valueOf(cursor.getString(cursor.getColumnIndex(COLUMN_STATUS)));
                     Employee us = new Employee(a, b, c, d, e,f,g,h);
                     user.add(us);
 
