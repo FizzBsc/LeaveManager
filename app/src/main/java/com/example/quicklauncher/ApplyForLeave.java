@@ -134,7 +134,7 @@ public class ApplyForLeave extends AppCompatActivity {
 
                             }
                         }
-                        if (m > i) {
+                        if (m >= i) {
                             LeaveApplication la = new LeaveApplication(laID, Login.eid, leaveName, d1, d2, i, "pending");
                             db.leaveApplicationDBArr.add(la);
                             db.addLeaveApplication(laID, Login.eid, leaveName, d1, d2, i, "pending");
