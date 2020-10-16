@@ -1,5 +1,6 @@
 package com.example.quicklauncher;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,12 +46,20 @@ public class Notification extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             String role = null;
             boolean manage = false;
             convertView = getLayoutInflater().inflate(R.layout.customnotification, null);
             TextView name = (TextView) convertView.findViewById(R.id.notifyPersonView);
             Button notificationButton = (Button) convertView.findViewById(R.id.notifyBut);
+
+            notificationButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    sendEmail(position);
+
+                }
+            });
 
             for (int i = 0; i < Database.user.size(); i++){
                 if (Database.user.get(i).getEmployeeID().equals(Login.eid)){
@@ -83,5 +92,22 @@ public class Notification extends AppCompatActivity {
 
             return convertView;
         }
+    }
+    public void sendEmail(int position){
+        int x = 0;
+        Database db = new Database(Notification.this);
+        for (int i = 0; i < db.user.size();i++) {
+            if (db.employeeLeaveAvailArr.get(position).geteID().equals(db.user.get(i).getEmployeeID())) {
+                x = i;
+            }
+        }
+        Intent email = new Intent(Intent.ACTION_SEND);
+        email.putExtra(Intent.EXTRA_EMAIL, new String[]{ Database.user.get(x).getEmail()});
+        email.putExtra(Intent.EXTRA_SUBJECT, "Leave Request");
+        email.putExtra(Intent.EXTRA_TEXT, "Your request has been approved!");
+
+        email.setType("message/rfc822");
+
+        startActivity(Intent.createChooser(email, "Choose an Email client :"));
     }
 }
