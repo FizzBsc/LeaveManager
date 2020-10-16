@@ -61,7 +61,7 @@ public class ViewMyRequests extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Database.leaveApplicationDBArr.get(position).setApprovalStatus("cancelled");
-                    db.updateLeaveApplication(Database.leaveApplicationDBArr.get(position).getApprovalStatus(),Database.leaveApplicationDBArr.get(position).geteID());
+                    db.updateLeaveApplication("cancelled",Database.leaveApplicationDBArr.get(position).leaveAppID);
                     notifyDataSetChanged();
                 }
             });
