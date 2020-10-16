@@ -75,6 +75,11 @@ public class NewUser extends AppCompatActivity {
                     int pNo = Integer.parseInt(phone.getText().toString());
                     String mail = email.getText().toString();
                     String eid = "EMP" + (Database.user.size()+1);
+                    for (int i = 0; i < Database.user.size(); i++) {
+                        if (Database.user.get(i).getEmployeeID().equals(eid)) {
+                            eid = "EMP" + (Database.user.size() + 2);
+                        }
+                    }
                     String manID = manager.getSelectedItem().toString();
                     String pos = position.getSelectedItem().toString();
 
