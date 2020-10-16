@@ -1,5 +1,7 @@
 package com.example.quicklauncher;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -52,6 +54,18 @@ public class ChangePassword extends AppCompatActivity {
                             finish();
                         }
                     }
+                }else{
+                    final AlertDialog alertDialog = new AlertDialog.Builder(ChangePassword.this).create();
+                    alertDialog.setTitle("Passwords do not match");
+                    alertDialog.setIcon(R.drawable.alert);
+
+                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            alertDialog.cancel();
+                        }
+                    });
+
+                    alertDialog.show();
                 }
 
             }
